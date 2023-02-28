@@ -1,0 +1,9 @@
+{
+	debug
+}
+
+*.localhost {
+    root * /usr/share/caddy
+    file_server
+    tls internal
+}
