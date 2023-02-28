@@ -6,4 +6,8 @@
     root * /usr/share/caddy
     file_server
     tls internal
+    templates
+    handle {
+        try_files {path} page.html
+    }
 }

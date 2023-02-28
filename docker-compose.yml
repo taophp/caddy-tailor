@@ -7,6 +7,6 @@ services:
       - "443:443"
     volumes:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile
-      - $PWD/site:/srv
+      - $PWD/sites:/usr/share/caddy
       - $PWD/caddy_data:/data
       - $PWD/caddy_config:/config
