@@ -1,1 +1,13 @@
-Hello {{.Host}}
+{{$hostDomains := split "." .Host}}<br>
+{{$contentDir := $hostDomains._0}}
+{{$configFilePath := printf "%s/.config.yml" $contentDir}}
+
+{{$configFileContent := (include "default.config.yml" | splitFrontMatter)}}
+{{$config := $configFileContent.Meta}}
+{{$config}}<br>
+
+{{if (fileExists $configFilePath)}}
+    {{$configFileContent := (include $configFilePath | splitFrontMatter)}}
+    {{$config = $configFileContent.Meta}}
+    {{$config}}<br>
+{{end}}
