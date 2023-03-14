@@ -8,6 +8,6 @@
     tls internal
     templates
     handle {
-        try_files {path} page.html
+        try_files {path} page.html index.html
     }
 }
