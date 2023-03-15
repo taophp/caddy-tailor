@@ -1,4 +1,4 @@
-{{ $defaultConfigFile := "default.config.yml"}}
+{{$defaultConfigFile := "default.config.yml"}}
 {{$defaultConfigFileContent := (include $defaultConfigFile | splitFrontMatter)}}
 {{$config := $defaultConfigFileContent.Meta}}
 
@@ -22,15 +22,19 @@
     {{$config = mergeOverwrite $config $pageConfig}}
 
     {{$themePath := printf "themes/%s/" $config.theme}}
-    {{$pageTemplate := printf "%s/index.html" $themePath}}
-
+    {{$pageTemplate := printf "%s/page.html" $themePath}}
     {{include $pageTemplate $config $content}}
 {{else}}
     {{$pathName := (slice $pathParts 1 | join "/")}}
     {{$pathPath := printf "%s/%s" $contentDir $pathName}}
     {{$pathPathDir := printf "%s/" $pathPath}}
     {{if and (fileExists $pathPath) (fileExists $pathPathDir)}}
-        DOSSIER
+        {{$themePath := printf "themes/%s/" $config.theme}}
+        {{$pageTemplate := printf "%s/index.html" $themePath}}
+        {{$config = $config | merge (dict "dir" $pathPath)}}
+        {{include $pageTemplate $config}}
+    {{else}}
+        {{httpError 404}}
     {{end}}
 {{end}}
 
