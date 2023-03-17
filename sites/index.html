@@ -27,8 +27,7 @@
 {{else}}
     {{$pathName := (slice $pathParts 1 | join "/")}}
     {{$pathPath := printf "%s/%s" $contentDir $pathName}}
-    {{$pathPathDir := printf "%s/" $pathPath}}
-    {{if and (fileExists $pathPath) (fileExists $pathPathDir)}}
+    {{if and (fileExists $pathPath)}}
         {{$themePath := printf "themes/%s/" $config.theme}}
         {{$pageTemplate := printf "%s/index.html" $themePath}}
         {{$config = $config | merge (dict "dir" $pathPath)}}
@@ -37,8 +36,3 @@
         {{httpError 404}}
     {{end}}
 {{end}}
-
-- [X] Si le fichier de destination existe avec extension md, l'afficher avec le template page.
-- [X] Si c'est un dossier dans lequel un fichier index.md existe, l'afficher avec le template page.
-- [ ] Si c'est un dossier un dossier, l'afficher avec le template index.html.
-- [ ] Sinon, erreur 404.

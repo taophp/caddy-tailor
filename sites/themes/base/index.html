@@ -1,4 +1,20 @@
 {{$config :=index .Args 0}}
+{{ $folders := list  }}
+{{ $files := list  }}
 
 Files :
-{{listFiles $config.dir}}
+{{$listFile := listFiles $config.dir}}
+{{range $filePath := $listFile}}
+    {{$realFilePath := (printf "%s/%s" $config.dir $filePath)}}
+    {{if hasSuffix ".md" $realFilePath}}
+        {{ $files = append $files (trimSuffix ".md" $filePath) }}
+    {{else}}
+        {{ $folders = append $folders ($filePath) }}
+    {{end}}
+{{end}}
+
+<h1>Dossiers</h1>
+{{$folders}}
+
+<h1>Fichiers</h1>
+{{$files}}
