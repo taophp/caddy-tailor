@@ -1,4 +1,8 @@
-{{$config :=index .Args 0}}
-{{$content :=index .Args 1}}
+{{- $config :=index .Args 0 -}}
+{{- $content :=index .Args 1 -}}
 
-{{markdown $content}}
+{{- include "/themes/base/head.html" $config -}}
+
+{{- markdown $content -}}
+
+{{- include "/themes/base/foot.html" $config -}}

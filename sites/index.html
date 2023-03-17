@@ -1,38 +1,40 @@
-{{$defaultConfigFile := "default.config.yml"}}
-{{$defaultConfigFileContent := (include $defaultConfigFile | splitFrontMatter)}}
-{{$config := $defaultConfigFileContent.Meta}}
+{{- $defaultConfigFile := "default.config.yml" -}}
+{{- $defaultConfigFileContent := (include $defaultConfigFile | splitFrontMatter) -}}
+{{- $config := $defaultConfigFileContent.Meta -}}
 
-{{$hostDomains := split "." .Host}}
-{{$contentDir := printf "subdomains/%s" $hostDomains._0}}
-{{$configFilePath := printf "%s/.config.yml" $contentDir}}
-{{if (fileExists $configFilePath)}}
-    {{$configFileContent := (include $configFilePath | splitFrontMatter)}}
-    {{$config = mergeOverwrite $config $configFileContent.Meta}}
-{{end}}
+{{- $hostDomains := split "." .Host -}}
+{{- $contentDir := printf "subdomains/%s" $hostDomains._0 -}}
+{{- $configFilePath := printf "%s/.config.yml" $contentDir -}}
+{{- $config = $config | merge (dict "rootdir" (dir $configFilePath)) -}}
+{{- if (fileExists $configFilePath) -}}
+    {{- $configFileContent := (include $configFilePath | splitFrontMatter) -}}
+    {{- $config = mergeOverwrite $config $configFileContent.Meta -}}
+{{- end -}}
 
 
-{{$pathParts := splitList "/" .OriginalReq.URL.Path}}
+{{- $pathParts := splitList "/" .OriginalReq.URL.Path -}}
 
-{{$contentFilename := default "index" (slice $pathParts 1 | join "/")}}
-{{$contentFilePath := printf "%s/%s.md" $contentDir $contentFilename}}
-{{if (fileExists $contentFilePath)}}
-    {{$contentFileContent := (include $contentFilePath | splitFrontMatter)}}
-    {{$pageConfig := $contentFileContent.Meta}}
-    {{$content := $contentFileContent.Body}}
-    {{$config = mergeOverwrite $config $pageConfig}}
-
-    {{$themePath := printf "themes/%s/" $config.theme}}
-    {{$pageTemplate := printf "%s/page.html" $themePath}}
-    {{include $pageTemplate $config $content}}
-{{else}}
-    {{$pathName := (slice $pathParts 1 | join "/")}}
-    {{$pathPath := printf "%s/%s" $contentDir $pathName}}
-    {{if and (fileExists $pathPath)}}
-        {{$themePath := printf "themes/%s/" $config.theme}}
-        {{$pageTemplate := printf "%s/index.html" $themePath}}
-        {{$config = $config | merge (dict "dir" $pathPath)}}
-        {{include $pageTemplate $config}}
-    {{else}}
-        {{httpError 404}}
-    {{end}}
-{{end}}
+{{- $contentFilename := default "index" (slice $pathParts 1 | join "/") -}}
+{{- $contentFilePath := printf "%s/%s.md" $contentDir $contentFilename -}}
+{{- if (fileExists $contentFilePath) -}}
+    {{- $contentFileContent := (include $contentFilePath | splitFrontMatter) -}}
+    {{- $pageConfig := $contentFileContent.Meta -}}
+    {{- $content := $contentFileContent.Body -}}
+    {{- $config = mergeOverwrite $config $pageConfig -}}
+    {{- $config = $config | merge (dict "dir" $contentDir) -}}
+    {{- $themePath := printf "themes/%s/" $config.theme -}}
+    {{- $pageTemplate := printf "%s/page.html" $themePath -}}
+    {{- include $pageTemplate $config $content -}}
+{{- else -}}
+    {{- $pathName := (slice $pathParts 1 | join "/") -}}
+    {{- $pathPath := printf "%s/%s" $contentDir $pathName -}}
+    {{- if and (fileExists $pathPath) -}}
+        {{- $themePath := printf "themes/%s/" $config.theme -}}
+        {{- $pageTemplate := printf "%s/index.html" $themePath -}}
+        {{- $config = $config | merge (dict "dir" $pathPath) -}}
+        {{- $config = $config | merge (dict "urldir" $pathName) -}}
+        {{- include $pageTemplate $config -}}
+    {{- else -}}
+        {{- httpError 404 -}}
+    {{- end -}}
+{{- end -}}

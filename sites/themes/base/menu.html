@@ -1,0 +1,20 @@
+{{- $config :=index .Args 0 -}}
+{{- $dir :=index .Args 1 -}}
+{{- $urldir :=index .Args 2 -}}
+{{- $entries := list  -}}
+{{- $listFile := listFiles $dir -}}
+{{- range $filePath := $listFile -}}
+    {{- $realFilePath := (printf "%s/%s" $dir $filePath) -}}
+    {{- if not (hasPrefix "." (base $realFilePath))}}
+        {{- if not (hasSuffix ".md" $realFilePath) -}}
+            {{- $entries = append $entries $filePath -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+<ul>
+    {{- range $entry := $entries -}}
+    <li><a href="{{$urldir}}/{{$entry}}">{{$entry}}</a>
+        {{- include "/themes/base/menu.html" $config (printf "%s/%s" $dir $entry) (printf "%s/%s" $urldir $entry) -}}
+    </li>
+    {{- end -}}
+</ul>
