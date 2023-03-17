@@ -23,7 +23,7 @@
     {{- $config = mergeOverwrite $config $pageConfig -}}
     {{- $config = $config | merge (dict "dir" $contentDir) -}}
     {{- $themePath := printf "themes/%s/" $config.theme -}}
-    {{- $pageTemplate := printf "%s/page.html" $themePath -}}
+    {{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
     {{- include $pageTemplate $config $content -}}
 {{- else -}}
     {{- $pathName := (slice $pathParts 1 | join "/") -}}

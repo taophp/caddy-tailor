@@ -1,4 +1,4 @@
 ---
-key: value
+template: indexWithContent
 ---
 Hello world !
