@@ -1,0 +1,28 @@
+  {{- $config :=index .Args 0 -}}
+  {{- $config = $config | merge (dict "template" "page") -}}
+  {{- include "/themes/baseonepage/head.html" $config -}}
+      {{- $files := list  -}}
+
+     {{- $listFile := listFiles $config.dir -}}
+     {{- range $filePath := $listFile -}}
+         {{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
+         {{- if hasSuffix ".md" $realFilePath -}}
+            {{- $contentFileContent := (include $realFilePath | splitFrontMatter) -}}
+            {{- $pageConfig := $contentFileContent.Meta -}}
+            {{- $content := $contentFileContent.Body -}}
+            {{- $config = mergeOverwrite $config $pageConfig -}}
+            {{- $config = $config | merge (dict "dir" $config.dir) -}}
+            {{- $themePath := printf "themes/%s/" $config.theme -}}
+            {{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
+            {{- include $pageTemplate $config $content -}}
+         {{- end -}}
+     {{- end -}}
+
+    <h1>Articles</h1>
+    <ul>
+        {{- range $file := $listFile -}}
+        <li><a href="#{{$file}}">{{$file}}</a></li>
+        {{- end -}}
+    </ul>
+
+  {{- include "/themes/base/foot.html" $config -}}
