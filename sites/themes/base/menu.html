@@ -9,8 +9,8 @@
         {{- if not (hasPrefix "index" (base $realFilePath))}}
             {{- if not (hasSuffix ".md" $realFilePath) -}}
                 {{- $entries = append $entries $filePath -}}
+            {{- end -}}
         {{- end -}}
-    {{- end -}}
     {{- end -}}
 {{- end -}}
 <ul>

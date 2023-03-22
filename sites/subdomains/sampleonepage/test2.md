@@ -1,1 +1,4 @@
+---
+background: white
+---
 Hello world !

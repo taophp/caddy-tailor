@@ -3,7 +3,18 @@
   {{- include "/themes/baseonepage/head.html" $config -}}
       {{- $files := list  -}}
 
-     {{- $listFile := listFiles $config.dir -}}
+     {{- $listFile := reverse (listFiles $config.dir) -}}
+
+     <nav>
+        <ul>
+            {{- range $file := $listFile -}}
+                {{- if hasSuffix ".md" $file -}}
+                    <li><a href="#{{trimSuffix ".md" $file}}">{{trimSuffix ".md" $file}}</a></li>
+                {{- end -}}
+            {{- end -}}
+        </ul>
+    </nav>
+
      {{- range $filePath := $listFile -}}
          {{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
          {{- if hasSuffix ".md" $realFilePath -}}
@@ -12,17 +23,12 @@
             {{- $content := $contentFileContent.Body -}}
             {{- $config = mergeOverwrite $config $pageConfig -}}
             {{- $config = $config | merge (dict "dir" $config.dir) -}}
+            {{- $config = $config | merge (dict "id" (trimSuffix ".md" $filePath)) -}}
             {{- $themePath := printf "themes/%s/" $config.theme -}}
             {{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
             {{- include $pageTemplate $config $content -}}
          {{- end -}}
      {{- end -}}
 
-    <h1>Articles</h1>
-    <ul>
-        {{- range $file := $listFile -}}
-        <li><a href="#{{$file}}">{{$file}}</a></li>
-        {{- end -}}
-    </ul>
 
   {{- include "/themes/base/foot.html" $config -}}

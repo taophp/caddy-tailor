@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 16px;
+}
+  
+nav ul{
+    width: 100vw;
+    height: 3rem;
+    background: yellow;
+    display: block;
+    position: fixed;
+    top:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    display: inline-block;
+    padding: 0.5em;
+}
+
+div.page {
+    width:100vw;
+    height: calc(100vh - 1rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
