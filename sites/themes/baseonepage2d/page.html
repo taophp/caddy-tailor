@@ -1,0 +1,6 @@
+{{- $config :=index .Args 0 -}}
+{{- $content :=index .Args 1 -}}
+<a id="{{$config.id}}"></a><div class="page" {{ if $config.background }} style="background:{{$config.background}}" {{ end }}>
+    {{- markdown $content -}}
+</div>
+

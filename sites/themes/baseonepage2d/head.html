@@ -1,0 +1,10 @@
+{{- $config :=index .Args 0 -}}
+<!DOCTYPE html>
+<html {{- if $config.lang }} lang="{{$config.lang}}"{{end}}>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/themes/baseonepage2d/assets/style.css">
+        <script src="/themes/baseonepage2d/assets/script.js"></script>
+        {{- if $config.head -}}{{$config.head}}{{end}}
+    </head>
+    <body {{if $config.bodyAttributes}}{{$config.bodyAttributes}} {{end}}>

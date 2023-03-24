@@ -1,0 +1,30 @@
+{{- $config :=index .Args 0 -}}
+{{- $config = $config | merge (dict "template" "category") -}}
+{{- include "/themes/baseonepage2d/head.html" $config -}}
+    {{- $files := list  -}}
+
+    {{- $listFile := listFiles $config.dir -}}
+
+    {{- range $filePath := $listFile -}}
+    {{- if not (hasPrefix "." (base $filePath))}}
+        {{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
+        {{- $config = $config | merge (dict "dir" $config.dir) -}}
+        {{- $config = $config | merge (dict "id" $filePath) -}}
+        {{- $themePath := printf "themes/%s/" $config.theme -}}
+        {{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
+        {{- include $pageTemplate $config -}}
+    {{- end -}}
+    {{- end -}}
+
+
+    <nav>
+        <ul>
+            {{- range $file := $listFile -}}
+                {{- if not (hasPrefix "." (base $file))}}
+                    <li><a href="#{{$file}}">{{$file}}</a></li>
+                    {{- end -}}
+            {{- end -}}
+        </ul>
+    </nav>    
+
+{{- include "/themes/base/foot.html" $config -}}
