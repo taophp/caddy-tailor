@@ -8,8 +8,8 @@ The pain with Caddy templates is that content and templates easily goes mixed an
 
 This project is a framework to code your own Caddy theme. You find here all you need to do so : a docker environment and three basic themes with few contents :
 
-- [base](/themes/base): handles a directory tree of markdown files : each (sub)directory is a (sub)category display a list of available markdown pages ; the menu handle all this hierarchy in a nested tree.
-- [baseonepage](/themes/baseonepage): displays all markdown files one after the other, each on it own screen, with a menu ;
-- [baseonepage2d](/themes/baseonepage): baseonepage on steroid, each row displays the markdown files contained in a directory ; each file is displayed on a screen, just swipe left or right.
+- [base](https://github.com/taophp/caddy-tailor/tree/main/sites/themes/base): handles a directory tree of markdown files : each (sub)directory is a (sub)category display a list of available markdown pages ; the menu handle all this hierarchy in a nested tree.
+- [baseonepage](https://github.com/taophp/caddy-tailor/tree/main/sites/themes/baseonepage): displays all markdown files one after the other, each on it own screen, with a menu ;
+- [baseonepage2d](https://github.com/taophp/caddy-tailor/tree/main/sites/themes/baseonepage): baseonepage on steroid, each row displays the markdown files contained in a directory ; each file is displayed on a screen, just swipe left or right.
 
 Start from them to make you own !
