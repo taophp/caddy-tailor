@@ -2,7 +2,7 @@
 
 CaddyTailor is a framework to build themes for the [Caddy server](https://caddyserver.com/).
 
-Caddy allows to display nearly static pages from markdown files using a [template module](https://caddyserver.com/docs/modules/http.handlers.templates). So it is not required anymore to compile your content with some tool like the famous [Jekyll](http://jekyllrb.com/), or one of his followers.
+Caddy allows to display nearly static pages from markdown files using a [template module](https://caddyserver.com/docs/modules/http.handlers.templates). So it is not required anymore to compile your content with some tool like the famous [Jekyll](http://jekyllrb.com/), or one of its followers.
 
 The pain with Caddy templates is that content and templates easily goes mixed and messy. So came up the idea of themes using only Caddy templates and some conguration tricks with the Caddyfile. And it works !
 
