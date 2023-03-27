@@ -13,3 +13,13 @@ This project is a framework to code your own Caddy theme. You find here all you 
 - [baseonepage2d](https://github.com/taophp/caddy-tailor/tree/main/sites/themes/baseonepage): baseonepage on steroid, each row displays the markdown files contained in a directory ; each file is displayed on a screen, just swipe left or right.
 
 Start from them to make you own !
+
+## How to start
+
+```bash
+$ git clone git@github.com:taophp/caddy-tailor.git
+$ cd caddy-tailor
+$ docker-compose up
+```
+
+Then open your browser to https://sample.localhost, https://sampleonepage.localhost or https://sampleonepage2d.localhost.
