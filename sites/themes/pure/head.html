@@ -4,8 +4,14 @@
 <html {{- if $config.lang }} lang="{{$config.lang}}"{{end}}>
     <head>
         <meta charset="utf-8">
-        <title>{{- if $config.title -}}{{$config.title}} | {{end}} Stephane Mourey.fr</title>
+        <title>{{- if $config.title -}}{{$config.title}} | {{end}}{{- if $config.subDomainTitle -}}{{$config.subDomainTitle}}{{end}}{{- if $config.siteTitle -}} | {{$config.siteTitle}}{{end}}</title>
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="/themes/{{$config.theme}}/assets/style.css">
+        <script defer src="/themes/{{$config.theme}}/assets/script.js"></script>
+        <link href="/themes/{{$config.theme}}/assets/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/themes/{{$config.theme}}/assets/style.css" rel="stylesheet" type="text/css" />
         {{- if $config.head -}}{{$config.head}}{{end}}
     </head>
-    <body {{if $config.bodyAttributes}}{{$config.bodyAttributes}} {{end}}>
+    <body class="reading" {{if $config.bodyAttributes}}{{$config.bodyAttributes}} {{end}}>
         <nav>{{- include (printf "/themes/%s/menu.html" $config.theme) $config $config.rootdir "" -}}</nav>
