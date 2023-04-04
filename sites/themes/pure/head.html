@@ -1,9 +1,11 @@
 {{- $config :=index .Args 0 -}}
+
 <!DOCTYPE html>
 <html {{- if $config.lang }} lang="{{$config.lang}}"{{end}}>
     <head>
         <meta charset="utf-8">
+        <title>{{- if $config.title -}}{{$config.title}} | {{end}} Stephane Mourey.fr</title>
         {{- if $config.head -}}{{$config.head}}{{end}}
     </head>
     <body {{if $config.bodyAttributes}}{{$config.bodyAttributes}} {{end}}>
-        <nav>{{- include  (printf "/themes/%s/menu.html" $config.theme) $config $config.rootdir "" -}}</nav>
+        <nav>{{- include (printf "/themes/%s/menu.html" $config.theme) $config $config.rootdir "" -}}</nav>
