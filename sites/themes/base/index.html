@@ -15,7 +15,7 @@
     <h1>Articles</h1>
     <ul>
         {{- range $file := $files -}}
-        <li><a href="/{{$config.urldir}}/{{$file}}">{{$file}}</a></li>
+        <li><a href="{{- if $config.footContents -}}/{{$config.urldir}}{{- end -}}/{{$file}}">{{$file}}</a></li>
         {{- end -}}
     </ul>
 
