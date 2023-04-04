@@ -1,6 +1,6 @@
 {{- $config :=index .Args 0 -}}
 {{- $config = $config | merge (dict "template" "category") -}}
-{{- include "/themes/baseonepage2d/head.html" $config -}}
+{{- include  (printf "/themes/%s/head.html" $config.theme) $config -}}
     {{- $files := list  -}}
 
     {{- $listFile := listFiles $config.dir -}}
@@ -27,4 +27,4 @@
         </ul>
     </nav>    
 
-{{- include "/themes/base/foot.html" $config -}}
+    {{- include  (printf "/themes/%s/foot.html" $config.theme) $config -}}

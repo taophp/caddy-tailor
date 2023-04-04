@@ -1,7 +1,7 @@
   {{- $config :=index .Args 0 -}}
   {{- $config = $config | merge (dict "template" "page") -}}
-  {{- include "/themes/baseonepage/head.html" $config -}}
-      {{- $files := list  -}}
+  {{- include  (printf "/themes/%s/head.html" $config.theme) $config -}}
+  {{- $files := list  -}}
 
      {{- $listFile := reverse (listFiles $config.dir) -}}
 
@@ -31,4 +31,4 @@
      {{- end -}}
 
 
-  {{- include "/themes/base/foot.html" $config -}}
+     {{- include  (printf "/themes/%s/foot.html" $config.theme) $config -}}
