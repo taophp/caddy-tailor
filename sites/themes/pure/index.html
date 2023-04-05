@@ -1,5 +1,5 @@
   {{- $config :=index .Args 0 -}}
-  {{- include "/themes/base/head.html" $config -}}
+  {{- include (printf "/themes/%s/head.html" $config.theme) $config -}}
 
       {{- $folders := list  -}}
       {{- $files := list  -}}
@@ -19,4 +19,4 @@
         {{- end -}}
     </ul>
 
-  {{- include "/themes/base/foot.html" $config -}}
+  {{- include (printf "/themes/%s/foot.html" $config.theme) $config -}}
