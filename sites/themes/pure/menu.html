@@ -1,4 +1,8 @@
 {{- $config :=index .Args 0 -}}
+<div class="container">
+    <a class="navbar-brand" href="/">{{ $config.subDomainTitle }}</a><a class="navbar-brand" href="//{{$config.siteDomain}}">{{$config.siteTitle}}</a>
+</div>
+
 {{- $dir :=index .Args 1 -}}
 {{- $urldir :=index .Args 2 -}}
 {{- $entries := list  -}}

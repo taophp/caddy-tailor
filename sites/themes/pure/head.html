@@ -10,8 +10,46 @@
         <link rel="stylesheet" href="/themes/{{$config.theme}}/assets/style.css">
         <script defer src="/themes/{{$config.theme}}/assets/script.js"></script>
         <link href="/themes/{{$config.theme}}/assets/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/themes/{{$config.theme}}/assets/stylesheet.css" rel="stylesheet" type="text/css" />
         <link href="/themes/{{$config.theme}}/assets/style.css" rel="stylesheet" type="text/css" />
+        <link href="/themes/{{$config.theme}}/assets/all.min.css" rel="stylesheet" type="text/css" />
         {{- if $config.head -}}{{$config.head}}{{end}}
     </head>
     <body class="reading" {{if $config.bodyAttributes}}{{$config.bodyAttributes}} {{end}}>
-        <nav>{{- include (printf "/themes/%s/menu.html" $config.theme) $config $config.rootdir "" -}}</nav>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">{{- include (printf "/themes/%s/menu.html" $config.theme) $config $config.rootdir "" -}}</nav>
+        </header>
+
+        {{- if $config.img2 -}}
+					{{- if $config.imgStyle -}}
+						<div class="img" style="background-image:url({{ $config.img2 }});{{ $config.imgStyle }}">
+					{{- else -}}
+						<div class="img" style="background-image:url({{ $config.img2 }})">
+					{{- end -}}
+        {{- else if $config.img -}}
+					{{- if $config.imgStyle -}}
+						<div class="img" style="background-image:url({{ $config.img }});{{ $config.imgStyle }}">
+					{{- else -}}
+						<div class="img" style="background-image:url({{ $config.img }})">
+					{{- end -}}
+				{{- end -}}
+				{{- if $config.img -}}
+					<div id="imgCredits">
+						<span class="title">À propos de l'image</span><br>
+						{{- if $config.imgAuthor -}}Auteur: {{ $config.imgAuthor }}<br> {{- end -}}
+						{{- if $config.imgSrc -}}<a href="{{ $config.imgSrc }}">Source</a>{{- end -}}
+					</div>
+				</div>
+				{{- end -}}
+				<div id="tools" class="position-sticky sticky-top">
+					<div id="burger"><span class="fas fa-bars"></span></div>
+					<div id="tools-wrapper">
+							{{- if $config.epub -}}<a href="{{$config.epub}}" title="Téléchargez l'epub !" class="fa-solid fa-book"></a>{{- end -}}{{- if $config.pdf -}}<a href="{{$config.pdf}}" title="Téléchargez le PDF !" class="fas fa-file-pdf"></a>{{- end -}}<a title="Partagez sur Facebook !" class="fab fa-facebook-f" href="https://www.facebook.com/sharer.php?u={{ $config.url }}&t={{ $config.title }} "></a><a title="Partagez sur Twitter !" href="https://twitter.com/share?url={{ $config.url }}{{ $config.url }}&text={{ $config.title }}&via=ImpossibleExil&related=ImpossibleExil" class="fab fa-twitter"></a><a title="Partager par mail !" href="mailto:?subject={{ $config.title }}%20(un%20texte%20de%20Stéphane%20Mourey)&body={{ $config.url }}{{ $config.url }}" class="fas fa-envelope"></a>
+						</div>
+					</div>
+
+
+        <main role="main" class="container">
+            <div class="row">
+                <div class="col-sm-12">
+

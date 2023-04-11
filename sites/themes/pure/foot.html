@@ -1,4 +1,46 @@
 {{- $config :=index .Args 0 -}}
 {{- if $config.footContents -}}{{$config.footContents}}{{end}}
+
+</div>
+</div>
+</main>
+
+<footer>
+    <div class="menu">
+        Contact
+    </div>
+    <div class="social">
+        <a href="mailto:stephanemourey.fr" title="Écrivez-moi" class="fa-solid fa-envelope"></a>
+        <a href="https://www.facebook.com/stephane.mourey.14" title="Retrouvez-moi sur Facebook" class="fab fa-facebook-f"></a>
+        <a href="https://twitter.com/ImpossibleExil" title="Suivez-moi sur Twitter" class="fab fa-twitter"></a>
+        <a href="https://github.com/taophp" title="Mes projets sur GitHub" class="fa-brands fa-github"></a>
+    </div>
+
+    <div class="licence">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="//stephanemourey.fr/res/img/88x31.png" /></a><br>Cette œuvre est mise à disposition selon les termes de la <br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Licence Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International</a>.
+    </div>
+</footer>
+
+<script src="/themes/{{$config.theme}}/assets/jquery.min.js"></script>
+<script src="/themes/{{$config.theme}}/assets/popper.min.js"></script>
+<script src="/themes/{{$config.theme}}/assets/bootstrap.min.js"></script>
+<script>
+	function checkToolsOverflow(){
+		if ($("#tools-wrapper").prop('scrollHeight')-1 > $("#tools").outerHeight(true)) {
+			$('#burger').show();
+			$('#burger').click(function(){
+				$("#tools").css('overflow') === 'hidden' ? $("#tools").css('overflow','visible') : $("#tools").css('overflow','hidden');
+			});
+		}else{
+			$('#burger').hide();
+		}
+	}
+	$(function(){
+		checkToolsOverflow();
+	});
+	$( window ).resize(function() {
+		checkToolsOverflow();
+	});
+</script>
     </body>
 </html>
