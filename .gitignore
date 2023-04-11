@@ -3,3 +3,5 @@ caddy_config/
 
 sites/subdomains/*
 sites/subdomains/sample*
+
+*.code-workspace
