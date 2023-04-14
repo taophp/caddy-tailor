@@ -9,8 +9,7 @@
     file_server
     templates
     route {
-        try_files /subdomains/{http.request.host.labels.2}/{path} {path} index.html
-        #try_files /subdomains/sample/{path} {path} index.html
+        try_files /subdomains/{http.request.host.labels.1}/{path} {path} index.html
     }
 
 }
