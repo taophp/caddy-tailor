@@ -1,13 +1,16 @@
+# To reload use this command : ` docker exec caddytailor_caddy_1 caddy reload --config /etc/caddy/Caddyfile `
 {
 	debug
 }
 
 *.localhost {
     root * /usr/share/caddy
-    file_server
     tls internal
+    file_server
     templates
-    handle {
-        try_files {path} page.html index.html
+    route {
+        #try_files /subdomains/{http.request.host.labels.2}/{path} {path} index.html
+        try_files /subdomains/sample/{path} {path} index.html
     }
+
 }
