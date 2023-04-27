@@ -5,7 +5,7 @@
 {{- $hostDomains := split "." .Host -}}
 {{- $contentDir := printf "subdomains/%s" $hostDomains._0 -}}
 {{- $configFilePath := printf "%s/.config.yml" $contentDir -}}
-{{- $config = $config | merge (dict "rootdir" (dir $configFilePath)) -}}
+{{- $config = $config | merge (dict "rootdir" $contentDir) -}}
 {{- if (fileExists $configFilePath) -}}
     {{- $configFileContent := (include $configFilePath | splitFrontMatter) -}}
     {{- $config = mergeOverwrite $config $configFileContent.Meta -}}
