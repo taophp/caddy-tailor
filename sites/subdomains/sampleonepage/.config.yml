@@ -1,4 +1,5 @@
 ---
 theme: baseonepage
 template: index
+debug: true
 ---

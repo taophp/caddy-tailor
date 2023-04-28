@@ -38,3 +38,9 @@
         {{- httpError 404 -}}
     {{- end -}}
 {{- end -}}
+
+{{- if $config.debug -}}
+    <pre><code>config:
+    {{- toPrettyJson $config -}}
+    </code></pre>
+{{- end -}}

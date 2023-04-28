@@ -2,6 +2,6 @@ caddy_data/
 caddy_config/
 
 sites/subdomains/*
-sites/subdomains/sample*
+!sites/subdomains/sample*
 
 *.code-workspace

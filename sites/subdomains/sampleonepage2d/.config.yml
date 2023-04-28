@@ -1,4 +1,5 @@
 ---
 theme: baseonepage2d
 template: index
+debug: true
 ---

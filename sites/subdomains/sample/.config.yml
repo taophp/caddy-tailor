@@ -1,4 +1,5 @@
 ---
 theme: base
 template: index
+debug: true
 ---
