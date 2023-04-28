@@ -3,6 +3,15 @@
 
 {{- include  (printf "/themes/%s/head.html" $config.theme) $config -}}
 
+<article>
+    <header class="sticky-top">
+        <h1>{{ $config.title }}</h1>
+    </header>
+    <div>
+
 {{- markdown $content -}}
+
+    </div>
+</article>
 
 {{- include  (printf "/themes/%s/foot.html" $config.theme) $config -}}

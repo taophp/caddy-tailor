@@ -44,7 +44,11 @@
 				<div id="tools" class="position-sticky sticky-top">
 					<div id="burger"><span class="fas fa-bars"></span></div>
 					<div id="tools-wrapper">
-							{{- if $config.epub -}}<a href="{{$config.epub}}" title="Téléchargez l'epub !" class="fa-solid fa-book"></a>{{- end -}}{{- if $config.pdf -}}<a href="{{$config.pdf}}" title="Téléchargez le PDF !" class="fas fa-file-pdf"></a>{{- end -}}<a title="Partagez sur Facebook !" class="fab fa-facebook-f" href="https://www.facebook.com/sharer.php?u={{ $config.url }}&t={{ $config.title }} "></a><a title="Partagez sur Twitter !" href="https://twitter.com/share?url={{ $config.url }}{{ $config.url }}&text={{ $config.title }}&via=ImpossibleExil&related=ImpossibleExil" class="fab fa-twitter"></a><a title="Partager par mail !" href="mailto:?subject={{ $config.title }}%20(un%20texte%20de%20Stéphane%20Mourey)&body={{ $config.url }}{{ $config.url }}" class="fas fa-envelope"></a>
+							{{- if $config.epub -}}<a href="{{$config.epub}}" title="Téléchargez l'epub !" class="fa-solid fa-book"></a>{{- end -}}
+							{{- if $config.pdf -}}<a href="{{$config.pdf}}" title="Téléchargez le PDF !" class="fas fa-file-pdf"></a>{{- end -}}
+							<a title="Partagez sur Facebook !" class="fab fa-facebook-f" href="https://www.facebook.com/sharer.php?u=https://{{ .Host }}{{ .OriginalReq.URL }}&t={{ $config.title }} "></a>
+							<a title="Partagez sur Twitter !" href="https://twitter.com/share?url=https://{{ .Host }}{{ .OriginalReq.URL }}&text={{ $config.title }}&via=ImpossibleExil&related=ImpossibleExil" class="fab fa-twitter"></a>
+							<a title="Partager par mail !" href="mailto:?subject={{ $config.title }}%20(un%20texte%20de%20Stéphane%20Mourey)&body=https://{{ .Host }}{{ .OriginalReq.URL }}" class="fas fa-envelope"></a>
 						</div>
 					</div>
 

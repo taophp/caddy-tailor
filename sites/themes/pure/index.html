@@ -8,14 +8,17 @@
      {{- range $filePath := $listFile -}}
          {{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
          {{- if hasSuffix ".md" $realFilePath -}}
-              {{- $files = append $files (trimSuffix ".md" $filePath) -}}
+              {{- $files = append $files $filePath -}}
          {{- end -}}
      {{- end -}}
 
     <h1>Articles</h1>
     <ul>
         {{- range $file := $files -}}
-        <li><a href="{{- if $config.footContents -}}/{{$config.urldir}}{{- end -}}/{{$file}}">{{$file}}</a></li>
+            {{- $realFile := (printf "%s/%s" $config.dir $file) -}}
+            {{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
+            {{- $fileConfig := $contentFileContent.Meta -}}
+            <li><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{$fileConfig.title}}</a></li>
         {{- end -}}
     </ul>
 
