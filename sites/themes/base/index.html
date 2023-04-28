@@ -1,8 +1,7 @@
   {{- $config :=index .Args 0 -}}
   {{- include  (printf "/themes/%s/head.html" $config.theme) $config -}}
 
-      {{- $folders := list  -}}
-      {{- $files := list  -}}
+     {{- $files := list  -}}
 
      {{- $listFile := listFiles $config.dir -}}
      {{- range $filePath := $listFile -}}
