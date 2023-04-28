@@ -16,12 +16,13 @@
 
 {{- $contentFilename := default "index" (slice $pathParts 1 | join "/") -}}
 {{- $contentFilePath := printf "%s/%s.md" $contentDir $contentFilename -}}
+
 {{- if (fileExists $contentFilePath) -}}
     {{- $contentFileContent := (include $contentFilePath | splitFrontMatter) -}}
     {{- $pageConfig := $contentFileContent.Meta -}}
     {{- $content := $contentFileContent.Body -}}
     {{- $config = mergeOverwrite $config $pageConfig -}}
-    {{- $config = $config | merge (dict "dir" $contentDir) -}}
+    {{- $_ := set $config "dir" $contentDir -}}
     {{- $themePath := printf "themes/%s/" $config.theme -}}
     {{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
     {{- include $pageTemplate $config $content -}}
@@ -31,8 +32,8 @@
     {{- if and (fileExists $pathPath) -}}
         {{- $themePath := printf "themes/%s/" $config.theme -}}
         {{- $pageTemplate := printf "%s/index.html" $themePath -}}
-        {{- $config = $config | merge (dict "dir" $pathPath) -}}
-        {{- $config = $config | merge (dict "urldir" $pathName) -}}
+        {{- $_ := set $config "dir" $pathPath -}}
+        {{- $_ := set $config "urldir" $pathName -}}
         {{- include $pageTemplate $config -}}
     {{- else -}}
         {{- httpError 404 -}}
@@ -41,6 +42,6 @@
 
 {{- if $config.debug -}}
     <pre><code>config:
-    {{- toPrettyJson $config -}}
+        {{- toPrettyJson $config -}}
     </code></pre>
 {{- end -}}
