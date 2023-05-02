@@ -11,15 +11,24 @@
               {{- $files = append $files $filePath -}}
          {{- end -}}
      {{- end -}}
+     {{- if $config.description -}}
+        <p>{{ markdown $config.description }}</p>
+     {{- end -}}
 
-    <h1>Articles</h1>
-    <ul>
+    <div class="card-group">
         {{- range $file := $files -}}
-            {{- $realFile := (printf "%s/%s" $config.dir $file) -}}
-            {{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
-            {{- $fileConfig := $contentFileContent.Meta -}}
-            <li><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{$fileConfig.title}}</a></li>
+            <div class="card">
+                {{- $realFile := (printf "%s/%s" $config.dir $file) -}}
+                {{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
+                {{- $fileConfig := $contentFileContent.Meta -}}
+                {{- if $fileConfig.img}}<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" class="card-img-top"></a>{{- end -}}
+                <div class="card-body">
+                    <h2 class="card-title"><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{$fileConfig.title}}</a></h2>
+                    <p class="card-text">{{$fileConfig.description}}</p>
+                    <a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary">Lire</a>
+                </div>
+            </div>
         {{- end -}}
-    </ul>
+    </div>
 
   {{- include (printf "/themes/%s/foot.html" $config.theme) $config -}}
