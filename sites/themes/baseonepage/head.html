@@ -4,6 +4,15 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="/themes/{{$config.theme}}/assets/style.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="/themes/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/themes/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/themes/favicon-16x16.png">
+        <link rel="manifest" href="/themes/site.webmanifest">
+        <link rel="mask-icon" href="/themes/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="shortcut icon" href="/themes/favicon.ico">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-config" content="/themes/browserconfig.xml">
+        <meta name="theme-color" content="#ffffff">
         {{- if $config.head -}}{{$config.head}}{{end}}
     </head>
     <body {{if $config.bodyAttributes}}{{$config.bodyAttributes}} {{end}}>
