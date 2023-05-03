@@ -36,8 +36,9 @@
 				{{- if $config.img -}}
 					<div id="imgCredits">
 						<span class="title">À propos de l'image</span><br>
-						{{- if $config.imgAuthor -}}Auteur: {{ $config.imgAuthor }}<br> {{- end -}}
+						{{- if $config.imgAuthor -}}Auteur: {{ $config.imgAuthor }} - {{ end -}}
 						{{- if $config.imgSrc -}}<a href="{{ $config.imgSrc }}">Source</a>{{- end -}}
+						{{- if $config.imgLicence -}}<br>Licence: {{ $config.imgLicence }}{{- end -}}
 					</div>
 				</div>
 				{{- end -}}

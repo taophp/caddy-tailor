@@ -15,7 +15,7 @@
         <p>{{ markdown $config.description }}</p>
      {{- end -}}
 
-    <div class="card-group">
+    <div class="card-columns">
         {{- range $file := $files -}}
             <div class="card">
                 {{- $realFile := (printf "%s/%s" $config.dir $file) -}}
@@ -24,7 +24,7 @@
                 {{- if $fileConfig.img}}<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" class="card-img-top"></a>{{- end -}}
                 <div class="card-body">
                     <h2 class="card-title"><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{$fileConfig.title}}</a></h2>
-                    <p class="card-text">{{$fileConfig.description}}</p>
+                    <p class="card-text">{{replace "\n" "<br>" $fileConfig.description}}</p>
                     <a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary">Lire</a>
                 </div>
             </div>
