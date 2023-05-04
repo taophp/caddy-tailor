@@ -34,7 +34,10 @@ body > main.container {
 
 body.reading {
 	font: 400 24px/150% alegreyaregular,Georgia,serif;
-	background:#f7f7f7 url(//stephanemourey.fr/res/img/noise.png);
+}
+
+body.reading .card {
+	font: 400 16px/150% alegreyaregular,Georgia,serif;
 }
 
 body.reading header {

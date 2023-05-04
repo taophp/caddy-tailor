@@ -6,10 +6,12 @@
 
      {{- $listFile := listFiles $config.dir -}}
      {{- range $filePath := $listFile -}}
-         {{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
-         {{- if hasSuffix ".md" $realFilePath -}}
-              {{- $files = append $files $filePath -}}
-         {{- end -}}
+        {{- if ne $filePath "index.md"}}
+            {{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
+            {{- if hasSuffix ".md" $realFilePath -}}
+                {{- $files = append $files $filePath -}}
+            {{- end -}}
+        {{- end -}}
      {{- end -}}
      {{- if $config.description -}}
         <p>{{ markdown $config.description }}</p>
