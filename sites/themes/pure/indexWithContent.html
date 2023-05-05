@@ -1,6 +1,9 @@
 {{- $config :=index .Args 0 -}}
 {{- $content :=index .Args 1 -}}
-{{- include (printf "/themes/%s/head.html" $config.theme) $config -}}
+<main role="main" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            {{- include (printf "/themes/%s/head.html" $config.theme) $config -}}
 
     {{- $folders := list  -}}
     {{- $files := list  -}}
@@ -14,7 +17,7 @@
           {{- end -}}
       {{- end -}}
    {{- end -}}
-   <div>{{ markdown $content }}</div>
+   <div class="mw-40em text-center mx-auto">{{ markdown $content }}</div>
 
   <div class="card-columns">
       {{- range $file := $files -}}

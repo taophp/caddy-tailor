@@ -1,5 +1,8 @@
   {{- $config :=index .Args 0 -}}
-  {{- include (printf "/themes/%s/head.html" $config.theme) $config -}}
+  <main role="main" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+              {{- include (printf "/themes/%s/head.html" $config.theme) $config -}}
 
       {{- $folders := list  -}}
       {{- $files := list  -}}
@@ -14,7 +17,7 @@
         {{- end -}}
      {{- end -}}
      {{- if $config.description -}}
-        <p>{{ markdown $config.description }}</p>
+        <p class="mw-40em text-center mx-auto">{{ $config.description }}</p>
      {{- end -}}
 
     <div class="card-columns">

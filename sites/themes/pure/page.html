@@ -2,12 +2,15 @@
 {{- $content :=index .Args 1 -}}
 
 {{- include  (printf "/themes/%s/head.html" $config.theme) $config -}}
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-sm-12">
 
 <article>
     <header class="sticky-top">
         <h1>{{ $config.title }}</h1>
     </header>
-    <div>
+    <div class="mw40em">
 
 {{- markdown $content -}}
 
