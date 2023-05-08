@@ -26,7 +26,7 @@
                 {{- $realFile := (printf "%s/%s" $config.dir $file) -}}
                 {{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
                 {{- $fileConfig := $contentFileContent.Meta -}}
-                {{- if $fileConfig.img}}<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" class="card-img-top"></a>{{- end -}}
+                {{- if $fileConfig.img}}<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" class="card-img-top" loading="lazy"></a>{{- end -}}
                 <div class="card-body">
                     <h2 class="card-title"><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{$fileConfig.title}}</a></h2>
                     <p class="card-text">{{replace "\n" "<br>" $fileConfig.description}}</p>
