@@ -6,7 +6,9 @@
     {{- $listFile := listFiles $config.dir -}}
     {{- range $filePath := $listFile -}}
         {{- if hasSuffix ".md" $filePath -}}
-            {{- $files = append $files (trimSuffix ".md" $filePath) -}}
+            {{- if ne $filePath "index.md"}}
+                {{- $files = append $files (trimSuffix ".md" $filePath) -}}
+            {{- end -}}
         {{- end -}}
     {{- end -}}
 
