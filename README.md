@@ -26,4 +26,4 @@ $ cd caddy-tailor
 $ docker-compose up
 ```
 
-Then open your browser to https://sample.localhost, https://sampleonepage.localhost or https://sampleonepage2d.localhost.
+Then open your browser to https://sample.localhost, https://sampleonepage.localhost or https://sampleonepage2d.localhost. Next explore and play with the [base](https://github.com/taophp/caddy-tailor/tree/main/sites/themes/base) theme and [others](https://github.com/taophp/caddy-tailor/tree/main/sites/themes) ! And explore and play with the [contents samples](https://github.com/taophp/caddy-tailor/tree/main/sites/subdomains) !
