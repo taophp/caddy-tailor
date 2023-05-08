@@ -77,9 +77,9 @@ nav.article ul li.prevpost {
 div.img {
 	width:100%;
 	height: 336px;
-	margin-top: 64px;
+	margin-top: 63px;
 	background: fixed;
-	background-position-y: 64px;
+	background-position-y: 63px;
 	background-position-x: center;
 	display:flex;
 	flex-direction:row-reverse;

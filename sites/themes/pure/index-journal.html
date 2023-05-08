@@ -1,6 +1,6 @@
   {{- $config :=index .Args 0 -}}
   {{- $content :=index .Args 1 -}}
-              {{- include (printf "/themes/%s/head.html" $config.theme) $config -}}
+  {{- include (printf "/themes/%s/head.html" $config.theme) $config -}}
 
       {{- $folders := list  -}}
       {{- $files := list  -}}
@@ -20,20 +20,19 @@
         <p class="mw-40em text-center mx-auto">{{ $config.description }}</p>
      {{- end -}}
 
-    <div class="card-columns">
         {{- range $file := $files -}}
-            <div class="card">
+            <ul class="mw-40em mx-auto list-unstyled">
                 {{- $realFile := (printf "%s/%s" $config.dir $file) -}}
                 {{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
                 {{- $fileConfig := $contentFileContent.Meta -}}
                 {{- if $fileConfig.img}}<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" class="card-img-top" loading="lazy"></a>{{- end -}}
-                <div class="card-body">
-                    <h2 class="card-title"><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{$fileConfig.title}}</a></h2>
-                    <p class="card-text">{{if $fileConfig.description }}{{replace "\n" "<br>" $fileConfig.description}}{{end}}</p>
+                <li>
+                    <h2><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{$fileConfig.title}}</a></h2>
+                    {{- if $fileConfig.date -}}<div class="float-right"><small>{{$fileConfig.date}}</small></div>{{- end -}}
+                    <p>{{if $fileConfig.description }}{{replace "\n" "<br>" $fileConfig.description}}{{end}}</p>
                     <a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary">Lire</a>
-                </div>
-            </div>
+                </li>
+            </ul>
         {{- end -}}
-    </div>
 
   {{- include (printf "/themes/%s/foot.html" $config.theme) $config -}}
