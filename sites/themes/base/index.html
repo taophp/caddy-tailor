@@ -1,4 +1,5 @@
 {{- $config :=index .Args 0 -}}
+{{- $content :=index .Args 1 -}}
 {{- include  (printf "/themes/%s/head.html" $config.theme) $config -}}
 
     {{- $files := list  -}}
@@ -12,7 +13,13 @@
         {{- end -}}
     {{- end -}}
 
-<h1>Articles</h1>
+    {{- if $content -}}
+        <div>{{ markdown $content }}</div>
+    {{- else if $config.description -}}
+        <p>{{ $config.description }}</p>
+    {{- end -}}
+
+    <h1>Articles</h1>
 <ul>
     {{- range $file := $files -}}
     <li><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{$file}}">{{$file}}</a></li>

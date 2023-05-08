@@ -1,5 +1,5 @@
 ---
-template: indexWithContent
+template: index
 ---
 Base is a very simple theme, with no CSS, no JavaScript, no layout. It's an ideal start to build you own theme if you planned to display your content through pages grouped by categories and subcategories.
 
