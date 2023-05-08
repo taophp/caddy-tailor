@@ -14,7 +14,7 @@ This project is a framework to code your own Caddy theme. You find here all you 
 - [base](https://github.com/taophp/caddy-tailor/tree/main/sites/themes/base): handles a directory tree of markdown files : each (sub)directory is a (sub)category display a list of available markdown pages ; the menu handle all this hierarchy in a nested tree.
 - [baseonepage](https://github.com/taophp/caddy-tailor/tree/main/sites/themes/baseonepage): displays all markdown files one after the other, each on it own screen, with a menu ;
 - [baseonepage2d](https://github.com/taophp/caddy-tailor/tree/main/sites/themes/baseonepage): baseonepage on steroid, each row displays the markdown files contained in a directory ; each file is displayed on a screen, just swipe left or right.
-- [Pure](https://github.com/taophp/caddy-tailor/tree/main/sites/themes/pure): a Bootstrap theme I planed to use for my [personal website](https://stephanemourey.fr) (french only, sorry !).
+- [Pure](https://github.com/taophp/caddy-tailor/tree/main/sites/themes/pure): a Bootstrap theme, migrated from [Sculpin](https://sculpin.io/), I'm using for my [personal website](https://stephanemourey.fr) (french only, sorry !).
 
 Start from them to make you own !
 
