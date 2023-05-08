@@ -1,6 +1,7 @@
 {{- $defaultConfigFile := "default.config.yml" -}}
 {{- $defaultConfigFileContent := (include $defaultConfigFile | splitFrontMatter) -}}
 {{- $config := $defaultConfigFileContent.Meta -}}
+{{- $content := false }}
 
 {{- $hostDomains := split "." .Host -}}
 {{- $contentDir := printf "subdomains/%s" $hostDomains._0 -}}
@@ -34,7 +35,7 @@
         {{- $pageTemplate := printf "%s/index.html" $themePath -}}
         {{- $_ := set $config "dir" $pathPath -}}
         {{- $_ := set $config "urldir" $pathName -}}
-        {{- include $pageTemplate $config -}}
+        {{- include $pageTemplate $config $content -}}
     {{- else -}}
         {{- httpError 404 -}}
     {{- end -}}

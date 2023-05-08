@@ -2,6 +2,7 @@
 {{- $content :=index .Args 1 -}}
 
 {{- include  (printf "/themes/%s/head.html" $config.theme) $config -}}
+{{- if $config.title}}<h1>{{$config.title}}</h1>{{- end -}}
 
 {{- markdown $content -}}
 
