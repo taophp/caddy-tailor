@@ -30,9 +30,27 @@
                     <h2><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{$fileConfig.title}}</a></h2>
                     {{- if $fileConfig.date -}}<div class="float-right"><small>{{$fileConfig.date}}</small></div>{{- end -}}
                     <p>{{if $fileConfig.description }}{{replace "\n" "<br>" $fileConfig.description}}{{end}}</p>
-                    <a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary">Lire</a>
+                    <div class="clearfix"><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary">Lire</a></div>
                 </li>
             </ul>
         {{- end -}}
+
+        <div class="subdomains">
+            <div class="text-center mx-auto"><em>Découvrez mes œuvres en ligne&nbsp;!</em></div>
+            <div class="card-group">
+                {{- range $subdomain := $config.subdomains -}}
+                    <div class="card">
+                        <a href="{{ $subdomain.url }}"><img src="{{ $subdomain.img }}" class="card-img-top" loading="lazy"></a>
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{{ $subdomain.url }}">{{ $subdomain.name }}</a></h5>
+                            <p class="card-text">{{ $subdomain.description }}</p>
+                        </div>
+                        <div class="card-footer border-0">
+                            <a href="{{ $subdomain.url }}" class="card-link float-right btn btn-primary">Visiter</a>
+                        </div>
+                    </div>
+                {{- end -}}
+            </div>
+        </div>
 
   {{- include (printf "/themes/%s/foot.html" $config.theme) $config -}}

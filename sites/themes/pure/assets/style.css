@@ -124,6 +124,12 @@ div.licence {
 	margin-top:.5em;
 }
 
+div.subdomains {
+	border-top: solid 1px silver;
+	padding-top:.5em;
+	margin-top:.5em;
+}
+
 div#tools {
 	top: 60px;
 	text-align:right;
