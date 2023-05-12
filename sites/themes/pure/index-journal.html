@@ -37,16 +37,13 @@
 
         <div class="subdomains">
             <div class="text-center mx-auto"><em>Découvrez mes œuvres en ligne&nbsp;!</em></div>
-            <div class="card-group">
+            <div class="subsomainslist">
                 {{- range $subdomain := $config.subdomains -}}
-                    <div class="card">
+                    <div class="subdomain">
                         <a href="{{ $subdomain.url }}"><img src="{{ $subdomain.img }}" class="card-img-top" loading="lazy"></a>
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="{{ $subdomain.url }}">{{ $subdomain.name }}</a></h5>
-                            <p class="card-text">{{ $subdomain.description }}</p>
-                        </div>
-                        <div class="card-footer border-0">
-                            <a href="{{ $subdomain.url }}" class="card-link float-right btn btn-primary">Visiter</a>
+                        <div>
+                            <h5 class="text-center"><a href="{{ $subdomain.url }}">{{ $subdomain.name }}</a></h5>
+                            <p class="px-1 text-center">{{ $subdomain.description }}</p>
                         </div>
                     </div>
                 {{- end -}}

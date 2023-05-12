@@ -1,3 +1,4 @@
+
 article {
 	max-width:33em;
 }
@@ -212,3 +213,34 @@ blockquote {
 .mw-40em {
 	max-width: 40em;
 }
+
+.subsomainslist {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+  }
+
+.subdomain {
+	display: inline-block;
+	width: 100%;
+}
+
+.subdomain p {
+	font-size: 1rem;
+	line-height: 1;
+}
+  
+  @media (min-width: 576px) {
+	.subdomain {
+	  width: calc(100% / 3);
+	  display: inline-block;
+	}
+  }
+  
+  @media (min-width: 1024px) {
+	.subdomain {
+	  width: calc(100% / 5);
+	  display: inline-block;
+	}
+  }
