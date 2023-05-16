@@ -10,10 +10,10 @@
         Contact
     </div>
     <div class="social">
-        <a href="mailto:stephanemourey.fr" title="Écrivez-moi" class="fa-solid fa-envelope"></a>
-        <a href="https://www.facebook.com/stephane.mourey.14" title="Retrouvez-moi sur Facebook" class="fab fa-facebook-f"></a>
-        <a href="https://twitter.com/ImpossibleExil" title="Suivez-moi sur Twitter" class="fab fa-twitter"></a>
-        <a href="https://github.com/taophp" title="Mes projets sur GitHub" class="fa-brands fa-github"></a>
+        {{- if $config.socials.mail -}}<a href="mailto:{{ $config.socials.mail }}" title="Écrivez-moi" class="fa-solid fa-envelope"></a>{{- end -}}
+        {{- if $config.socials.facebook -}}<a href="https://www.facebook.com/{{ $config.socials.facebook }}" title="Retrouvez-moi sur Facebook" class="fab fa-facebook-f"></a>{{- end -}}
+        {{- if $config.socials.twitter -}}<a href="https://twitter.com/{{ $config.socials.twitter }}" title="Suivez-moi sur Twitter" class="fab fa-twitter"></a>{{- end -}}
+        {{- if $config.socials.github -}}<a href="https://github.com/{{ $config.socials.github }}" title="Mes projets sur GitHub" class="fa-brands fa-github"></a>{{- end -}}
     </div>
 
     <div class="licence">
