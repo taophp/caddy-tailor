@@ -20,27 +20,27 @@
         </header>
 
         {{- if $config.img2 -}}
-					{{- if $config.imgStyle -}}
-						<div class="img" style="background-image:url({{ $config.img2 }});{{ $config.imgStyle }}">
-					{{- else -}}
-						<div class="img" style="background-image:url({{ $config.img2 }})">
-					{{- end -}}
+			{{- if $config.imgStyle -}}
+				<div class="img" style="background-image:url({{ $config.img2 }});{{ $config.imgStyle }}">
+			{{- else -}}
+				<div class="img" style="background-image:url({{ $config.img2 }})">
+			{{- end -}}
         {{- else if $config.img -}}
-					{{- if $config.imgStyle -}}
-						<div class="img" style="background-image:url({{ $config.img }});{{ $config.imgStyle }}">
-					{{- else -}}
-						<div class="img" style="background-image:url({{ $config.img }})">
-					{{- end -}}
-				{{- end -}}
-				{{- if $config.img -}}
-					<div id="imgCredits">
-						<span class="title">À propos de l'image</span><br>
-						{{- if $config.imgAuthor -}}Auteur: {{ $config.imgAuthor }} - {{ end -}}
-						{{- if $config.imgSrc -}}<a href="{{ $config.imgSrc }}">Source</a>{{- end -}}
-						{{- if $config.imgLicence -}}<br>Licence: {{ $config.imgLicence }}{{- end -}}
-					</div>
+			{{- if $config.imgStyle -}}
+				<div class="img" style="background-image:url({{ $config.img }});{{ $config.imgStyle }}">
+			{{- else -}}
+				<div class="img" style="background-image:url({{ $config.img }})">
+			{{- end -}}
+		{{- end -}}
+		{{- if $config.img -}}
+				<div id="imgCredits">
+					<span class="title">À propos de l'image</span><br>
+					{{- if $config.imgAuthor -}}Auteur: {{ $config.imgAuthor }} - {{ end -}}
+					{{- if $config.imgSrc -}}<a href="{{ $config.imgSrc }}">Source</a>{{- end -}}
+					{{- if $config.imgLicence -}}<br>Licence: {{ $config.imgLicence }}{{- end -}}
 				</div>
-				{{- end -}}
+			</div>	
+		{{- end -}}
 				<div id="tools" class="position-sticky sticky-top">
 					<div id="burger"><span class="fas fa-bars"></span></div>
 					<div id="tools-wrapper">
