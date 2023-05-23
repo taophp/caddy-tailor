@@ -234,3 +234,7 @@ blockquote {
   .small {
 	line-height: 1.3;
   }
+
+  :target {
+	scroll-margin-top: 200px;
+  }
