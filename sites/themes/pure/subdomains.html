@@ -1,0 +1,16 @@
+{{- $config :=index .Args 0 -}}
+
+<div class="subdomains">
+    <div class="text-center mx-auto"><em>Découvrez mes œuvres en ligne&nbsp;!</em></div>
+    <div class="subsomainslist">
+        {{- range $subdomain := $config.subdomains -}}
+            <div class="subdomain">
+                <a href="{{ $subdomain.url }}"><img src="{{ $subdomain.img }}" class="card-img-top" loading="lazy"></a>
+                <div>
+                    <h5 class="text-center"><a href="{{ $subdomain.url }}">{{ $subdomain.name }}</a></h5>
+                    <p class="px-1 text-center">{{ $subdomain.description }}</p>
+                </div>
+            </div>
+        {{- end -}}
+    </div>
+</div>

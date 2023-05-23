@@ -1,0 +1,25 @@
+{{- $config :=index .Args 0 -}}
+{{- $content :=index .Args 1 -}}
+
+{{- include  (printf "/themes/%s/head.html" $config.theme) $config -}}
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <header class="sticky-top">
+                <h1 class="pt-0 mb-5">{{ $config.title }}</h1>
+            </header>
+            <div class="mw40em">
+                {{if and $config.description (not $config.hideDescription)}}<div class="mx-5 my-3 text-muted font-weight-light text-justify small">{{$config.description}}</div>{{end}}
+                <article class="text-justify">
+
+            {{- markdown $content -}}
+                </article>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+{{- include (printf "/themes/%s/subdomains.html" $config.theme) $config -}}
+{{- include  (printf "/themes/%s/foot.html" $config.theme) $config -}}
