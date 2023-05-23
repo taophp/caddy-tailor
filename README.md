@@ -1,6 +1,6 @@
 # CaddyTailor
 
-CaddyTailor is a framework to build themes for the [Caddy server](https://caddyserver.com/).
+CaddyTailor is a framework to build themes using template function provided by the [Caddy web server](https://caddyserver.com/).
 
 ** WARNING ! **
 Some themes will not work with the current (2.6.4) and lower versions of Caddy, because the template engine has no way to distinct directories from ordinary files. A fix was proposed and will be available with Caddy 2.7.0. In the meantime, you have to compile caddy by yourself with `xcaddy build master`. Of course, this is handled by Docker if you use it.
