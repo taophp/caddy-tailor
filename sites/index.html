@@ -30,7 +30,7 @@
 {{- else -}}
     {{- $pathName := (slice $pathParts 1 | join "/") -}}
     {{- $pathPath := printf "%s/%s" $contentDir $pathName -}}
-    {{- if and (fileExists $pathPath) -}}
+    {{- if fileExists $pathPath -}}
         {{- $themePath := printf "themes/%s/" $config.theme -}}
         {{- $pageTemplate := printf "%s/index.html" $themePath -}}
         {{- $_ := set $config "dir" $pathPath -}}
