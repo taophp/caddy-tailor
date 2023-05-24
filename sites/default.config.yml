@@ -4,4 +4,6 @@ lang: en
 template: page
 debug: false
 debugStack: {}
+displayCaddyTailorLogo: true
+displayPixyBlueLogo: true
 ---

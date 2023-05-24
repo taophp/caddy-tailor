@@ -1,5 +1,3 @@
 {{- $config :=index .Args 0 -}}
 {{- if $config.footContents -}}{{$config.footContents}}{{end}}
-<div style="text-align: center;">Proudly powered by <a href="https://github.com/taophp/caddy-tailor" target="_blank"><img style="max-height: 4em;top: 1.3em;position: relative;"src="/themes/CaddyTailorLogoWithTextOnSides.svg" alt="CaddyTailor"></a>.</div>
-    </body>
-</html>
+{{- include  "/themes/core/tailorAndPixyLogos.html" $config -}}
