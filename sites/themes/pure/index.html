@@ -20,16 +20,16 @@
         <p class="mw-40em text-center mx-auto">{{ $config.description }}</p>
      {{- end -}}
 
-    <div class="card-columns">
+    <div class="articlelist">
         {{- range $file := $files -}}
-            <div class="card">
+            <div class="article">
                 {{- $realFile := (printf "%s/%s" $config.dir $file) -}}
                 {{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
                 {{- $fileConfig := $contentFileContent.Meta -}}
                 {{- if $fileConfig.img}}<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" class="card-img-top" loading="lazy"></a>{{- end -}}
                 <div class="card-body">
                     <h2 class="card-title"><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{$fileConfig.title}}</a></h2>
-                    <p class="card-text">{{if $fileConfig.description }}{{replace "\n" "<br>" $fileConfig.description}}{{end}}</p>
+                    <p class="card-text">{{if $fileConfig.description }}{{markdown $fileConfig.description}}{{end}}</p>
                     <a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary">Lire</a>
                 </div>
             </div>

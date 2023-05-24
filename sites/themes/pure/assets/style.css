@@ -205,14 +205,14 @@ blockquote {
 	max-width: 40em;
 }
 
-.subsomainslist {
+.subsomainslist, .articlelist {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: flex-start;
   }
 
-.subdomain {
+.subdomain, .article {
 	display: inline-block;
 	width: 100%;
 }
@@ -221,7 +221,13 @@ blockquote {
 	font-size: 1rem;
 	line-height: 1;
 }
-  
+
+.article p {
+	font-size: 1.5rem;
+	line-height: 1;
+}
+
+
   @media (min-width: 576px) {
 	.subdomain {
 	  width: calc(100% / 3);
@@ -231,6 +237,20 @@ blockquote {
   
   @media (min-width: 1024px) {
 	.subdomain {
+	  width: calc(100% / 5);
+	  display: inline-block;
+	}
+  }
+
+  @media (min-width: 576px) {
+	.article {
+	  width: calc(100% / 3);
+	  display: inline-block;
+	}
+  }
+  
+  @media (min-width: 1200px) {
+	.article {
 	  width: calc(100% / 5);
 	  display: inline-block;
 	}
