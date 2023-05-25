@@ -1,39 +1,47 @@
-  {{- $config :=index .Args 0 -}}
-  {{- $content :=index .Args 1 -}}
-              {{- include (printf "/themes/%s/head.html" $config.theme) $config -}}
+{{- $config :=index .Args 0 -}}
+{{- $content :=index .Args 1 -}}
+{{- include (printf "/themes/%s/head.html" $config.theme) $config -}}
 
-      {{- $folders := list  -}}
-      {{- $files := list  -}}
+{{- $folders := list  -}}
+{{- $files := list  -}}
 
-     {{- $listFile := listFiles $config.dir -}}
-     {{- range $filePath := $listFile -}}
-        {{- if ne $filePath "index.md"}}
-            {{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
-            {{- if hasSuffix ".md" $realFilePath -}}
-                {{- $files = append $files $filePath -}}
-            {{- end -}}
-        {{- end -}}
-     {{- end -}}
-     {{- if $content -}}
-        <div class="mw-40em text-center mx-auto">{{ markdown $content }}</div>
-     {{- else if $config.description -}}
-        <p class="mw-40em text-center mx-auto">{{ $config.description }}</p>
-     {{- end -}}
+{{- $listFile := listFiles $config.dir -}}
+{{- range $filePath := $listFile -}}
+	{{- if ne $filePath "index.md"}}
+		{{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
+		{{- if hasSuffix ".md" $realFilePath -}}
+			{{- $files = append $files $filePath -}}
+		{{- end -}}
+	{{- end -}}
+{{- end -}}
+{{- if $content -}}
+	<div class="mw-40em text-center mx-auto">{{ markdown $content }}</div>
+{{- else if $config.description -}}
+	<p class="mw-40em text-center mx-auto">{{ $config.description }}</p>
+{{- end -}}
 
-    <div class="articlelist">
-        {{- range $file := $files -}}
-            <div class="article">
-                {{- $realFile := (printf "%s/%s" $config.dir $file) -}}
-                {{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
-                {{- $fileConfig := $contentFileContent.Meta -}}
-                {{- if $fileConfig.img}}<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" class="card-img-top" loading="lazy"></a>{{- end -}}
-                <div class="card-body">
-                    <h2 class="card-title"><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{$fileConfig.title}}</a></h2>
-                    <p class="card-text">{{if $fileConfig.description }}{{markdown $fileConfig.description}}{{end}}</p>
-                    <a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary">Lire</a>
-                </div>
-            </div>
-        {{- end -}}
-    </div>
+<div class="articlelist">
+	{{- range $file := $files -}}
+		<div class="article">
+			{{- $realFile := (printf "%s/%s" $config.dir $file) -}}
+			{{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
+			{{- $fileConfig := $contentFileContent.Meta -}}
+			{{- if $fileConfig.img}}
+				<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" class="card-img-top" loading="lazy"></a>
+			{{- end -}}
+			<div class="card-body">
+				<h2 class="card-title">
+					<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{$fileConfig.title}}</a>
+				</h2>
+				<p class="card-text">
+					{{if $fileConfig.description }}
+						{{markdown $fileConfig.description}}
+					{{end}}
+				</p>
+				<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary">Lire</a>
+			</div>
+		</div>
+	{{- end -}}
+</div>
 
-  {{- include (printf "/themes/%s/foot.html" $config.theme) $config -}}
+{{- include (printf "/themes/%s/foot.html" $config.theme) $config -}}
