@@ -27,7 +27,7 @@
                 {{- $fileConfig := $contentFileContent.Meta -}}
                 {{- if $fileConfig.img}}<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" class="card-img-top" loading="lazy"></a>{{- end -}}
                 <li>
-                    <h2><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{$fileConfig.title}}</a></h2>
+                    <h2><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{markdown $fileConfig.title}}</a></h2>
                     {{- if $fileConfig.date -}}<div class="float-right ml-5 mb-2 small text-muted">{{$fileConfig.date}}</div>{{- end -}}
                     <p class="text-justify">{{if $fileConfig.description }}{{markdown $fileConfig.description}}{{end}}</p>
                     <div class="clearfix"><a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary">Lire</a></div>
