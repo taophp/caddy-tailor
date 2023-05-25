@@ -81,6 +81,9 @@
 							{{- if $config.shares.twitter -}}
 								<a title="Partagez sur Twitter !" href="https://twitter.com/share?url=https://{{ .Host }}{{ .OriginalReq.URL }}{{ if $config.title }}&text={{ $config.title| urlquery }}{{end}}{{ if $config.socials.twitter }}&via={{ $config.socials.twitter }}{{ end }}" class="fab fa-twitter"></a>
 							{{- end -}}
+							{{- if $config.shares.linkedin -}}
+								<a title="Partagez sur LinkedIn !" href="https://www.linkedin.com/sharing/share-offsite/?url=https://{{ .Host }}{{ .OriginalReq.URL }}{{ if $config.title }}&title={{ $config.title| urlquery }}{{end}}{{ if $config.description }}&summary={{ $config.description|urlquery }}{{ end }}" class="fab fa-linkedin"></a>
+							{{- end -}}
 							{{- if $config.shares.mail -}}
 								<a title="Partager par mail !" href="mailto:?subject={{ $config.title| urlquery }}&body=https://{{ .Host }}{{ .OriginalReq.URL }}" class="fas fa-envelope"></a>
 							{{- end -}}
