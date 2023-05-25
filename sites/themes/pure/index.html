@@ -20,6 +20,7 @@
 	<p class="mw-40em text-center mx-auto">{{ $config.description }}</p>
 {{- end -}}
 
+{{- $files = reverse ($files|sortAlpha) }}
 <div class="articlelist">
 	{{- range $file := $files -}}
 		<div class="article">
