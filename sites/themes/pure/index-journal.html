@@ -37,14 +37,11 @@
 			{{- end -}}
 		{{- end -}}
 		<li class="mx-2">
-			{{- if $fileConfig.date -}}
-				<div class="float-{{$float}} mb-2 small text-muted w-50">
 					{{- if $fileConfig.img}}
+					<div class="float-{{$float}} w-50">
 						<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" loading="lazy" class="w-100"></a><br>
+					</div>
 					{{- end -}}
-					{{- $fileConfig.date -}}
-				</div>
-			{{- end -}}
 			<h2>
 				<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{markdown $fileConfig.title}}</a>
 			</h2>
@@ -54,7 +51,10 @@
 				{{end}}
 			</div>
 			<div class="clearfix">
-				<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary mr-2 mb-2">Lire</a>
+					<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary mr-2 mb-2">Lire</a>
+					{{- if $fileConfig.date -}}
+					<div class="float-left  small text-muted mt-3">{{- $fileConfig.date -}}</div>
+				{{- end -}}
 			</div>
 		</li>
 	{{- end -}}
