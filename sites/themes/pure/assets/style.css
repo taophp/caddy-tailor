@@ -276,3 +276,26 @@ blockquote {
 body.journal ul img.card-img-top {
 	max-width: 10rem;
 }
+
+a, a:active {
+	color: red;
+}
+
+.btn-primary, .btn-primary:active {
+	background-color: red;
+	border-color: red;
+}
+
+.btn-primary:focus {
+	background-color: red;
+	border-color: #f99;
+	box-shadow: 0 0 0 .2rem rgba(255,38,38,.5)
+}
+
+a:hover {
+	color: #700;
+}
+.btn-primary:hover {
+	background-color: #700;
+	border-color: #700;
+}

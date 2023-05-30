@@ -49,11 +49,11 @@
 			<h2>
 				<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{markdown $fileConfig.title}}</a>
 			</h2>
-			<p class="text-justify">
+			<div class="text-justify">
 				{{if $fileConfig.description }}
 					{{markdown $fileConfig.description}}
 				{{end}}
-			</p>
+			</div>
 			<div class="clearfix">
 				<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary">Lire</a>
 			</div>
