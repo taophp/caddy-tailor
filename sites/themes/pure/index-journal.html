@@ -21,21 +21,34 @@
 {{- end -}}
 
 {{- $files = reverse ($files|sortAlpha) }}
+{{- $counter := 0 -}}
+{{- $float := "right ml-5" }}
 {{- range $file := $files -}}
-	<ul class="mw-40em mx-auto list-unstyled">
-		{{- $realFile := (printf "%s/%s" $config.dir $file) -}}
-		{{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
-		{{- $fileConfig := $contentFileContent.Meta -}}
-		{{- if $fileConfig.img}}
-			<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" class="card-img-top" loading="lazy"></a>
+	{{- $realFile := (printf "%s/%s" $config.dir $file) -}}
+	{{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
+	{{- $fileConfig := $contentFileContent.Meta -}}
+	{{- if $fileConfig.img -}}
+		{{$counter = add1 $counter}}
+		{{- if mod $counter 2 -}}
+			{{- $float = "right ml-5" -}}
+		{{- else -}}
+			{{- $float = "left mr-5" -}}
 		{{- end -}}
+	{{- end -}}
+	<ul class="mw-40em mx-auto list-unstyled">
 		<li>
+			{{- if $fileConfig.date -}}
+				<div class="float-{{$float}} mb-2 small text-muted">
+					{{$fileConfig.date}}<br>
+					{{- if $fileConfig.img}}
+						<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" class="card-img-top" loading="lazy"></a>
+					{{- end -}}
+
+				</div>
+			{{- end -}}
 			<h2>
 				<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}">{{markdown $fileConfig.title}}</a>
 			</h2>
-			{{- if $fileConfig.date -}}
-				<div class="float-right ml-5 mb-2 small text-muted">{{$fileConfig.date}}</div>
-			{{- end -}}
 			<p class="text-justify">
 				{{if $fileConfig.description }}
 					{{markdown $fileConfig.description}}

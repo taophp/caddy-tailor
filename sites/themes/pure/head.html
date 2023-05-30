@@ -30,7 +30,7 @@
 			{{$config.head}}
 		{{end}}
 	</head>
-	<body class="reading" {{if $config.bodyAttributes}} {{$config.bodyAttributes}} {{end}}>
+	<body class="reading {{if $config.bodyClasses}} {{$config.bodyClasses}} {{end}}" {{if $config.bodyAttributes}} {{$config.bodyAttributes}} {{end}}>
 		<header>
 			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">{{- include (printf "/themes/%s/menu.html" $config.theme) $config $config.rootdir "" -}}</nav>
 		</header>
