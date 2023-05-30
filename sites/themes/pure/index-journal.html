@@ -23,27 +23,26 @@
 {{- $files = reverse ($files|sortAlpha) }}
 {{- $counter := 0 -}}
 {{- $float := "right ml-5" }}
-{{- range $file := $files -}}
-	{{- $realFile := (printf "%s/%s" $config.dir $file) -}}
-	{{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
-	{{- $fileConfig := $contentFileContent.Meta -}}
-	{{- if $fileConfig.img -}}
-		{{$counter = add1 $counter}}
-		{{- if mod $counter 2 -}}
-			{{- $float = "right ml-5" -}}
-		{{- else -}}
-			{{- $float = "left mr-5" -}}
+<ul class="mw-40em mx-auto list-unstyled">
+	{{- range $file := $files -}}
+		{{- $realFile := (printf "%s/%s" $config.dir $file) -}}
+		{{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
+		{{- $fileConfig := $contentFileContent.Meta -}}
+		{{- if $fileConfig.img -}}
+			{{$counter = add1 $counter}}
+			{{- if mod $counter 2 -}}
+				{{- $float = "right ml-2" -}}
+			{{- else -}}
+				{{- $float = "left mr-2" -}}
+			{{- end -}}
 		{{- end -}}
-	{{- end -}}
-	<ul class="mw-40em mx-auto list-unstyled">
-		<li>
+		<li class="mx-2">
 			{{- if $fileConfig.date -}}
-				<div class="float-{{$float}} mb-2 small text-muted">
-					{{$fileConfig.date}}<br>
+				<div class="float-{{$float}} mb-2 small text-muted w-50">
 					{{- if $fileConfig.img}}
-						<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" class="card-img-top" loading="lazy"></a>
+						<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}"><img src="{{$fileConfig.img}}" loading="lazy" class="w-100"></a><br>
 					{{- end -}}
-
+					{{- $fileConfig.date -}}
 				</div>
 			{{- end -}}
 			<h2>
@@ -55,11 +54,11 @@
 				{{end}}
 			</div>
 			<div class="clearfix">
-				<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary">Lire</a>
+				<a href="{{if $config.urldir }}/{{$config.urldir}}{{end}}/{{ trimSuffix ".md" $file }}" class="card-link float-right btn btn-primary mr-2 mb-2">Lire</a>
 			</div>
 		</li>
-	</ul>
-{{- end -}}
+	{{- end -}}
+</ul>
 
 {{- include (printf "/themes/%s/subdomains.html" $config.theme) $config -}}
 {{- include (printf "/themes/%s/foot.html" $config.theme) $config -}}

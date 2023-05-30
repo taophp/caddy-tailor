@@ -32,7 +32,7 @@ body>main.container {
 }
 
 body.reading {
-	font: 400 24px/150% alegreyaregular, Georgia, serif;
+	font: 400 16px/150% alegreyaregular, Georgia, serif;
 }
 
 body.reading .card {
@@ -273,17 +273,13 @@ blockquote {
 	scroll-margin-top: 200px;
 }
 
-body.journal ul img.card-img-top {
-	max-width: 10rem;
-}
-
 a, a:active {
 	color: red;
 }
 
 .btn-primary, .btn-primary:active {
-	background-color: red;
-	border-color: red;
+	background-color: red !important;
+	border-color: red !important;
 }
 
 .btn-primary:focus {
@@ -296,6 +292,11 @@ a:hover {
 	color: #700;
 }
 .btn-primary:hover {
-	background-color: #700;
-	border-color: #700;
+	background-color: #700 !important;
+	border-color: #700 !important;
+}
+
+.mw40em {
+	max-width: 33em;
+	margin:0 auto;
 }
