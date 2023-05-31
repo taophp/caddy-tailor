@@ -1,0 +1,34 @@
+  {{- $config :=index .Args 0 -}}
+  {{- $config = $config | merge (dict "template" "page") -}}
+  {{- include  (printf "/themes/%s/head.html" $config.theme) $config -}}
+  {{- $files := list  -}}
+
+     {{- $listFile := reverse (listFiles $config.dir) -}}
+
+     <nav>
+        <ul>
+            {{- range $file := $listFile -}}
+                {{- if hasSuffix ".md" $file -}}
+                    <li><a href="#{{trimSuffix ".md" $file}}">{{trimSuffix ".md" $file}}</a></li>
+                {{- end -}}
+            {{- end -}}
+        </ul>
+    </nav>
+
+     {{- range $filePath := $listFile -}}
+         {{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
+         {{- if hasSuffix ".md" $realFilePath -}}
+            {{- $contentFileContent := (include $realFilePath | splitFrontMatter) -}}
+            {{- $pageConfig := $contentFileContent.Meta -}}
+            {{- $content := $contentFileContent.Body -}}
+            {{- $config = mergeOverwrite $config $pageConfig -}}
+            {{- $config = $config | merge (dict "dir" $config.dir) -}}
+            {{- $config = $config | merge (dict "id" (trimSuffix ".md" $filePath)) -}}
+            {{- $themePath := printf "themes/%s/" $config.theme -}}
+            {{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
+            {{- include $pageTemplate $config $content -}}
+         {{- end -}}
+     {{- end -}}
+
+
+     {{- include  (printf "/themes/%s/foot.html" $config.theme) $config -}}
