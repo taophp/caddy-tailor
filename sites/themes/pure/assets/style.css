@@ -300,3 +300,7 @@ a:hover {
 	max-width: 33em;
 	margin:0 auto;
 }
+
+#tools-wrapper a {
+	background-color: #fff;
+}

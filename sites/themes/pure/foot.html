@@ -29,7 +29,7 @@
 <script src="/themes/{{$config.theme}}/assets/bootstrap.min.js"></script>
 <script>
 	function checkToolsOverflow(){
-		if ($("#tools-wrapper").prop('scrollHeight')-1 > $("#tools").outerHeight(true)) {
+		if ($("#tools-wrapper").prop('scrollHeight')-3 > $("#tools").outerHeight(true)) {
 			$('#burger').show();
 			$('#burger').click(function(){
 				$("#tools").css('overflow') === 'hidden' ? $("#tools").css('overflow','visible') : $("#tools").css('overflow','hidden');
