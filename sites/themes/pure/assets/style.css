@@ -40,7 +40,7 @@ body.reading .card {
 }
 
 body.reading header {
-	top: 98px;
+	top: 51px;
 	background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 69%, rgba(255, 255, 255, 1) 74%, rgba(220, 220, 220, 0.88) 77%, rgba(255, 255, 255, 0.77) 80%, rgba(255, 255, 255, 0) 100%);
 }
 
