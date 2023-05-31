@@ -22,21 +22,23 @@
 			{{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
 			{{- $fileConfig := $contentFileContent.Meta -}}
 			<li>
-				<a href="#{{trimSuffix " .md" $file}}">{{$fileConfig.title}}</a>
+				<a href="#{{$fileConfig.title| urlquery}}">{{$fileConfig.title}}</a>
 			</li>
 		{{- end -}}
 	</ul>
 </nav>
-{{- range $file := $files -}}
-	{{- $realFilePath := (printf "%s/%s" $config.dir $file) -}}
-	{{- $contentFileContent := (include $realFilePath | splitFrontMatter) -}}
-	{{- $pageConfig := $contentFileContent.Meta -}}
-	{{- $content := $contentFileContent.Body -}}
-	{{- $config = mergeOverwrite $config $pageConfig -}}
-	{{- $config = $config | merge (dict "dir" $config.dir) -}}
-	{{- $config = $config | merge (dict "id" (trimSuffix ".md" $file)) -}}
-	{{- $themePath := printf "themes/%s/" $config.theme -}}
-	{{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
-	{{- include $pageTemplate $config $content -}}
-{{- end -}}
-{{- include  (printf "/themes/%s/foot.html" $config.theme) $config -}}
+<div class="container mx-auto">
+	{{- range $file := $files -}}
+		{{- $realFilePath := (printf "%s/%s" $config.dir $file) -}}
+		{{- $contentFileContent := (include $realFilePath | splitFrontMatter) -}}
+		{{- $pageConfig := $contentFileContent.Meta -}}
+		{{- $content := $contentFileContent.Body -}}
+		{{- $config = mergeOverwrite $config $pageConfig -}}
+		{{- $config = $config | merge (dict "dir" $config.dir) -}}
+		{{- $config = $config | merge (dict "id" (trimSuffix ".md" $file)) -}}
+		{{- $themePath := printf "themes/%s/" $config.theme -}}
+		{{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
+		{{- include $pageTemplate $config $content -}}
+	{{- end -}}
+	{{- include  (printf "/themes/%s/foot.html" $config.theme) $config -}}
+</div>
