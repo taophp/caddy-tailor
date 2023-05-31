@@ -5,3 +5,4 @@ sites/subdomains/*
 !sites/subdomains/sample*
 
 *.code-workspace
+/sites/themes/pixy/node_modules/*
