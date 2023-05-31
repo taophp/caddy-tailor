@@ -20,9 +20,9 @@
 	<p class="mw-40em text-center mx-auto">{{ $config.description }}</p>
 {{- end -}}
 
-{{- $files = reverse ($files|sortAlpha) }}
+{{- $files = reverse ($files|sortAlpha) -}}
 {{- $counter := 0 -}}
-{{- $float := "right ml-5" }}
+{{- $float := "right ml-5" -}}
 <ul class="mw-40em mx-auto list-unstyled">
 	{{- range $file := $files -}}
 		{{- $realFile := (printf "%s/%s" $config.dir $file) -}}
