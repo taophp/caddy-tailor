@@ -1,5 +1,11 @@
 {{- $config :=index .Args 0 -}}
-{{- if $config.footContents -}}{{$config.footContents}}{{end}}
-{{- include  "/themes/core/tailorAndPixyLogos.html" $config -}}
-    </body>
-</html>
+<footer class="text-primary-lighter bg-secondary-950 text-center">
+	{{- if $config.footContents -}}
+		{{$config.footContents}}
+	{{end}}
+	{{- include  "/themes/core/tailorAndPixyLogos.html" $config -}}
+	{{- if $config.showPalette -}}
+		{{- include  (printf "/themes/%s/palette.html" $config.theme) $config -}}
+	{{- end -}}
+</footer>
+</body></html>

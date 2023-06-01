@@ -6,5 +6,6 @@
         {{- include "/themes/core/favicon.html" $config -}}
         {{- if $config.head -}}{{$config.head}}{{end}}
         <link href="/themes/{{$config.theme}}/assets/style.css" rel="stylesheet" type="text/css">
+        <script src="/themes/{{$config.theme}}/assets/jorempsipsum.js"></script>
     </head>
-    <body style="position:relative;min-height:100vh" {{if $config.bodyAttributes}}{{$config.bodyAttributes}} {{end}}>
+    <body style="position:relative;min-height:100vh" class="bg-primary-50" {{if $config.bodyAttributes}}{{$config.bodyAttributes}} {{end}}>

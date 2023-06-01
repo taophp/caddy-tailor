@@ -27,6 +27,7 @@
 		{{- end -}}
 	</ul>
 </nav>
+
 <div class="container mx-auto">
 	{{- range $file := $files -}}
 		{{- $realFilePath := (printf "%s/%s" $config.dir $file) -}}
@@ -40,5 +41,5 @@
 		{{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
 		{{- include $pageTemplate $config $content -}}
 	{{- end -}}
-	{{- include  (printf "/themes/%s/foot.html" $config.theme) $config -}}
 </div>
+{{- include  (printf "/themes/%s/foot.html" $config.theme) $config -}}
