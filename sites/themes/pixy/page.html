@@ -1,6 +1,6 @@
 {{- $config :=index .Args 0 -}}
 {{- $content :=index .Args 1 -}}
-<a id="{{$config.title| urlquery}}"></a><div class="h-screen" {{ if $config.background }} style="background:{{$config.background}}" {{ end }}>
+<a id="{{$config.id}}"></a><div class="page h-screen" {{- if $config.background -}} style="background:{{$config.background}}" {{- end -}} {{- if $config.class -}} class="background:{{$config.class}}" {{- end -}}>
     <div class="prose">{{- markdown $content -}}</div>
 </div>
 

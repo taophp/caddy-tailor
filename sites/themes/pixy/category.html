@@ -1,0 +1,33 @@
+{{- $config :=index .Args 0 -}}
+{{- $config = $config | merge (dict "template" "page") -}}
+
+{{- $files := list  -}}
+{{- $dir := printf "%s/%s" $config.dir $config.id -}}
+
+{{- $listFile := listFiles $dir -}}
+{{- range $filePath := $listFile -}}
+	{{- $realFilePath := (printf "%s/%s" $dir $filePath) -}}
+	{{- if hasSuffix ".md" $realFilePath -}}
+		{{- $files = append $files $filePath -}}
+	{{- end -}}
+{{- end -}}
+{{- $files = $files|sortAlpha }}
+
+<div class="category" id="{{$config.id}}">
+	<div class="control control-left"></div>
+
+	{{- range $filePath := $files -}}
+		{{- $realFilePath := (printf "%s/%s" $dir $filePath) -}}
+		{{- $contentFileContent := (include $realFilePath | splitFrontMatter) -}}
+		{{- $pageConfig := $contentFileContent.Meta -}}
+		{{- $content := $contentFileContent.Body -}}
+		{{- $config = mergeOverwrite $config $pageConfig -}}
+		{{- $config = $config | merge (dict "dir" $dir) -}}
+		{{- $config = $config | merge (dict "id" (trimSuffix ".md" $filePath)) -}}
+		{{- $themePath := printf "themes/%s/" $config.theme -}}
+		{{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
+		{{- include $pageTemplate $config $content -}}
+	{{- end -}}
+
+	<div class="control control-right"></div>
+</div>

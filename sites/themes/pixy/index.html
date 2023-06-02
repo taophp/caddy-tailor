@@ -1,45 +1,60 @@
 {{- $config :=index .Args 0 -}}
-{{- $config = $config | merge (dict "template" "page") -}}
+{{- $config = $config | merge (dict "template" "category") -}}
 {{- include  (printf "/themes/%s/head.html" $config.theme) $config -}}
-{{- $files := list  -}}
 
+{{- $files := list  -}}
 {{- $listFile := listFiles $config.dir -}}
 {{- range $filePath := $listFile -}}
-	{{- if ne $filePath "index.md"}}
+	{{- if not (hasPrefix "." (base $filePath))}}
 		{{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
-		{{- if hasSuffix ".md" $realFilePath -}}
-			{{- $files = append $files $filePath -}}
+		{{- $stat := fileStat $realFilePath -}}
+		{{- if $stat.IsDir -}}
+			{{- $categoryConfigFilePath := (printf "%s/%s" $realFilePath "01-index.md") -}}
+			{{- if fileExists $categoryConfigFilePath}}
+				{{- $contentFileContent := (include $categoryConfigFilePath | splitFrontMatter) -}}
+				{{- $fileConfig := $contentFileContent.Meta -}}
+				{{- if not $fileConfig.hidden -}}
+					{{- $files = append $files $filePath -}}
+				{{- end -}}
+			{{- else -}}
+				{{- $files = append $files $filePath -}}
+			{{- end -}}
 		{{- end -}}
 	{{- end -}}
 {{- end -}}
-
 {{- $files = $files|sortAlpha }}
 
 <nav>
 	<ul>
 		{{- range $file := $files -}}
 			{{- $realFile := (printf "%s/%s" $config.dir $file) -}}
-			{{- $contentFileContent := (include $realFile | splitFrontMatter) -}}
-			{{- $fileConfig := $contentFileContent.Meta -}}
-			<li>
-				<a href="#{{$fileConfig.title| urlquery}}">{{$fileConfig.title}}</a>
-			</li>
+			{{- $categoryConfigFilePath := (printf "%s/%s" $realFile "01-index.md") -}}
+			{{- if fileExists $categoryConfigFilePath}}
+				{{- $contentFileContent := (include $categoryConfigFilePath | splitFrontMatter) -}}
+				{{- $fileConfig := $contentFileContent.Meta -}}
+				{{- if not $fileConfig.hideInMenu -}}
+					<li>
+						<a href="#{{$fileConfig.title| urlquery}}">{{$fileConfig.title}}</a>
+					</li>
+				{{- end -}}
+			{{else}}
+				<li>
+					<a href="#{{$file}}">{{$file}}</a>
+				</li>
+			{{- end -}}
 		{{- end -}}
 	</ul>
 </nav>
 
 <div class="container mx-auto">
-	{{- range $file := $files -}}
-		{{- $realFilePath := (printf "%s/%s" $config.dir $file) -}}
-		{{- $contentFileContent := (include $realFilePath | splitFrontMatter) -}}
-		{{- $pageConfig := $contentFileContent.Meta -}}
-		{{- $content := $contentFileContent.Body -}}
-		{{- $config = mergeOverwrite $config $pageConfig -}}
+	{{- range $filePath := $files -}}
+		{{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
 		{{- $config = $config | merge (dict "dir" $config.dir) -}}
-		{{- $config = $config | merge (dict "id" (trimSuffix ".md" $file)) -}}
+		{{- $config = $config | merge (dict "id" $filePath) -}}
 		{{- $themePath := printf "themes/%s/" $config.theme -}}
 		{{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
-		{{- include $pageTemplate $config $content -}}
+		{{- include $pageTemplate $config -}}
 	{{- end -}}
+
 </div>
 {{- include  (printf "/themes/%s/foot.html" $config.theme) $config -}}
