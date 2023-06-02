@@ -10,7 +10,16 @@
 		{{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
 		{{- $stat := fileStat $realFilePath -}}
 		{{- if $stat.IsDir -}}
-			{{- $files = append $files $filePath -}}
+			{{- $categoryConfigFilePath := (printf "%s/%s" $realFilePath "01-index.md") -}}
+			{{- if fileExists $categoryConfigFilePath}}
+				{{- $contentFileContent := (include $categoryConfigFilePath | splitFrontMatter) -}}
+				{{- $fileConfig := $contentFileContent.Meta -}}
+				{{- if not $fileConfig.hidden -}}
+					{{- $files = append $files $filePath -}}
+				{{- end -}}
+			{{- else -}}
+				{{- $files = append $files $filePath -}}
+			{{- end -}}
 		{{- end -}}
 	{{- end -}}
 {{- end -}}
