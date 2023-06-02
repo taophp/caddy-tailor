@@ -1,0 +1,23 @@
+{{- $config :=index .Args 0 -}}
+{{- $dir :=index .Args 1 -}}
+{{- $urldir :=index .Args 2 -}}
+
+{{- $files := list  -}}
+{{- $listFile := listFiles $dir -}}
+{{- range $filePath := $listFile -}}
+	{{- $realFilePath := (printf "%s/%s" $dir $filePath) -}}
+	{{- $stat := fileStat $realFilePath -}}
+	{{- if $stat.IsDir -}}
+		{{- $files = append $files $filePath -}}
+	{{- end -}}
+{{- end -}}
+{{- $files = $files|sortAlpha }}
+
+<ul>
+	{{- range $file := $files -}}
+		<li>
+			<a href="{{$urldir}}/{{$file}}">{{$file}}</a>
+			{{- include "/themes/core/foldersAndSubfoldersMenu.html" $config (printf "%s/%s" $dir $file) (printf "%s/%s" $urldir $file) -}}
+		</li>
+	{{- end -}}
+</ul>

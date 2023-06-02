@@ -7,4 +7,4 @@
         {{- if $config.head -}}{{$config.head}}{{end}}
     </head>
     <body style="position:relative;min-height:100vh" {{if $config.bodyAttributes}}{{$config.bodyAttributes}} {{end}}>
-        <nav><div><a href="/">🏡</a></div>{{- include  (printf "/themes/%s/menu.html" $config.theme) $config $config.rootdir "" -}}</nav>
+        <nav><div><a href="/">🏡</a></div>{{- include "/themes/core/foldersAndSubfoldersMenu.html" $config $config.rootdir "" -}}</nav>
