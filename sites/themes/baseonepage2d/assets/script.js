@@ -1,6 +1,8 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const categories = document.querySelectorAll('.category');
-    let startX, startY, distX, distY, threshold = 5, allowedTime = 30000, elapsedTime, startTime;
+    let startX, startY, distX, distY, threshold = 5,
+        allowedTime = 30000,
+        elapsedTime, startTime;
 
     categories.forEach(category => {
         const pages = category.querySelectorAll('.page');
@@ -12,16 +14,16 @@ document.addEventListener("DOMContentLoaded", function() {
         updateControls(category);
 
         controls.forEach(control => {
-            control.addEventListener('click', function() {
+            control.addEventListener('click', function () {
                 const direction = this.classList.contains('control-left') ? -1 : 1;
                 const pageCount = pages.length;
-                
+
                 if (currentPageIndex + direction >= 0 && currentPageIndex + direction < pageCount) {
                     currentPageIndex += direction;
                     pages.forEach(page => {
                         page.style.transform = `translateX(${-currentPageIndex * pageWidth}px)`;
                     });
-                    
+
                     // Supprime la classe "active" de l'élément précédemment actif
                     const activePage = category.querySelector('.active');
                     if (activePage) {
@@ -35,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
 
-        category.addEventListener('touchstart', function(e) {
+        category.addEventListener('touchstart', function (e) {
             var touchobj = e.changedTouches[0];
             startX = touchobj.pageX;
             startY = touchobj.pageY;
@@ -45,14 +47,14 @@ document.addEventListener("DOMContentLoaded", function() {
             e.preventDefault();
         }, false);
 
-        category.addEventListener('touchmove', function(e) {
+        category.addEventListener('touchmove', function (e) {
             var touchobj = e.changedTouches[0];
             distX = touchobj.pageX - startX;
             distY = touchobj.pageY - startY;
             e.preventDefault();
         }, false);
 
-        category.addEventListener('touchend', function(e) {
+        category.addEventListener('touchend', function (e) {
             elapsedTime = new Date().getTime() - startTime;
             if (elapsedTime <= allowedTime) {
                 if (Math.abs(distX) > Math.abs(distY)) {
@@ -67,13 +69,13 @@ document.addEventListener("DOMContentLoaded", function() {
                         if (distY < 0) {
                             const nextCategory = category.nextElementSibling;
                             if (nextCategory) {
-                              location.hash = nextCategory.id;
+                                location.hash = nextCategory.id;
                             }
                         } else if (distY > 0) {
                             const prevCategory = category.previousElementSibling;
                             console.log(prevCategory);
                             if (prevCategory) {
-                              location.hash = prevCategory.id;
+                                location.hash = prevCategory.id;
                             }
                         }
                     }
@@ -82,26 +84,27 @@ document.addEventListener("DOMContentLoaded", function() {
         }, false);
     });
 });
-  
-function updateControls(category) {
-const pages = category.querySelectorAll('.page');
-const controlLeft = category.querySelector('.control-left');
-const controlRight = category.querySelector('.control-right');
 
-if (pages.length <= 1) {
-    controlLeft.classList.add('disabled');
-    controlRight.classList.add('disabled');
-} else {
-    if (pages[0].classList.contains('active')) {
-    controlLeft.classList.add('disabled');
-    controlRight.classList.remove('disabled');
-    } else if (pages[pages.length - 1].classList.contains('active')) {
-    controlLeft.classList.remove('disabled');
-    controlRight.classList.add('disabled');
+function updateControls(category) {
+    const pages = category.querySelectorAll('.page');
+    const controlLeft = category.querySelector('.control-left');
+    const controlRight = category.querySelector('.control-right');
+
+    if (pages.length <= 1) {
+        controlLeft.classList.add('disabled');
+        controlRight.classList.add('disabled');
     } else {
-    controlLeft.classList.remove('disabled');
-    controlRight.classList.remove('disabled');
+        if (pages[0].classList.contains('active')) {
+            controlLeft.classList.add('disabled');
+            controlRight.classList.remove('disabled');
+        } else if (pages[pages.length - 1].classList.contains('active')) {
+            controlLeft.classList.remove('disabled');
+            controlRight.classList.add('disabled');
+        } else {
+            controlLeft.classList.remove('disabled');
+            controlRight.classList.remove('disabled');
+        }
     }
 }
-}
-  
+
+document.addEventListener("DOMContentLoaded",function(){var links=document.querySelectorAll("a[href^='http://'], a[href^='https://']");links.forEach(function(link){link.addEventListener("click",function(event){window.open(this.href);event.preventDefault();});});});

@@ -1,0 +1,2 @@
+#!/bin/bash
+npx tailwindcss -i sites/themes/pixy/assets/src/style.css -o sites/themes/pixy/assets/style.css --watch &
