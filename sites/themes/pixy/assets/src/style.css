@@ -20,7 +20,6 @@ nav {
 nav ul{
     width: 100vw;
     height: 3rem;
-    background: yellow;
     display: block;
     display: flex;
     align-items: center;
