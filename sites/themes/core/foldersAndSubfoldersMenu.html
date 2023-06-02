@@ -5,10 +5,12 @@
 {{- $files := list  -}}
 {{- $listFile := listFiles $dir -}}
 {{- range $filePath := $listFile -}}
-	{{- $realFilePath := (printf "%s/%s" $dir $filePath) -}}
-	{{- $stat := fileStat $realFilePath -}}
-	{{- if $stat.IsDir -}}
-		{{- $files = append $files $filePath -}}
+	{{- if not (hasPrefix "." (base $filePath))}}
+		{{- $realFilePath := (printf "%s/%s" $dir $filePath) -}}
+		{{- $stat := fileStat $realFilePath -}}
+		{{- if $stat.IsDir -}}
+			{{- $files = append $files $filePath -}}
+		{{- end -}}
 	{{- end -}}
 {{- end -}}
 {{- $files = $files|sortAlpha }}
