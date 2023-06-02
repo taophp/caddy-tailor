@@ -1,30 +1,40 @@
 {{- $config :=index .Args 0 -}}
 {{- $config = $config | merge (dict "template" "category") -}}
 {{- include  (printf "/themes/%s/head.html" $config.theme) $config -}}
-    {{- $files := list  -}}
-
-    {{- $listFile := listFiles $config.dir -}}
-
-    {{- range $filePath := $listFile -}}
-    {{- if not (hasPrefix "." (base $filePath))}}
-        {{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
-        {{- $config = $config | merge (dict "dir" $config.dir) -}}
-        {{- $config = $config | merge (dict "id" $filePath) -}}
-        {{- $themePath := printf "themes/%s/" $config.theme -}}
-        {{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
-        {{- include $pageTemplate $config -}}
-    {{- end -}}
-    {{- end -}}
 
 
-    <nav>
-        <ul>
-            {{- range $file := $listFile -}}
-                {{- if not (hasPrefix "." (base $file))}}
-                    <li><a href="#{{$file}}">{{$file}}</a></li>
-                    {{- end -}}
-            {{- end -}}
-        </ul>
-    </nav>    
+{{- $files := list  -}}
+{{- $listFile := listFiles $config.dir -}}
+{{- range $filePath := $listFile -}}
+	{{- if not (hasPrefix "." (base $filePath))}}
+		{{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
+		{{- $stat := fileStat $realFilePath -}}
+		{{- if $stat.IsDir -}}
+			{{- $files = append $files $filePath -}}
+		{{- end -}}
+	{{- end -}}
+{{- end -}}
+{{- $files = $files|sortAlpha }}
 
-    {{- include  (printf "/themes/%s/foot.html" $config.theme) $config -}}
+
+{{- range $filePath := $files -}}
+	{{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
+	{{- $config = $config | merge (dict "dir" $config.dir) -}}
+	{{- $config = $config | merge (dict "id" $filePath) -}}
+	{{- $themePath := printf "themes/%s/" $config.theme -}}
+	{{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
+	{{- include $pageTemplate $config -}}
+{{- end -}}
+
+
+<nav>
+	<ul>
+		{{- range $file := $files -}}
+			<li>
+				<a href="#{{$file}}">{{$file}}</a>
+			</li>
+		{{- end -}}
+	</ul>
+</nav>
+
+{{- include  (printf "/themes/%s/foot.html" $config.theme) $config -}}
