@@ -30,9 +30,19 @@
 <nav>
 	<ul>
 		{{- range $file := $files -}}
-			<li>
-				<a href="#{{$file}}">{{$file}}</a>
-			</li>
+			{{- $realFile := (printf "%s/%s" $config.dir $file) -}}
+			{{- $categoryConfigFilePath := (printf "%s/%s" $realFile "01-index.md") -}}
+			{{- if fileExists $categoryConfigFilePath}}
+				{{- $contentFileContent := (include $categoryConfigFilePath | splitFrontMatter) -}}
+				{{- $fileConfig := $contentFileContent.Meta -}}
+				<li>
+					<a href="#{{$fileConfig.title| urlquery}}">{{$fileConfig.title}}</a>
+				</li>
+			{{else}}
+				<li>
+					<a href="#{{$file}}">{{$file}}</a>
+				</li>
+			{{- end -}}
 		{{- end -}}
 	</ul>
 </nav>
