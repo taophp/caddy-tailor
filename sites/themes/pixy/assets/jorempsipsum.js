@@ -7,23 +7,23 @@ function jowiki(element) {
   const languageCode = navigator.language.substring(0, 2);
 
   // Construct the URL to retrieve a random article in the browser's language
-  const url = 'https://${languageCode}.wikipedia.org/w/api.php?action=query&list=random&format=json&rnnamespace=0&rnlimit=1&callback=processRandomArticle';
+  const url = `https://${languageCode}.wikipedia.org/w/api.php?action=query&list=random&format=json&rnnamespace=0&rnlimit=1&callback=processRandomArticle`;
 
   // Define a global function to handle the JSONP response
   window.processRandomArticle = function (data) {
     const pageId = data.query.random[0].id;
 
     // Construct the URL to the HTML content of the article
-    const htmlUrl = 'https://${languageCode}.wikipedia.org/w/api.php?action=parse&pageid=${pageId}&format=json&callback=processArticleHTML';
+    const htmlUrl = `https://${languageCode}.wikipedia.org/w/api.php?action=parse&pageid=${pageId}&format=json&callback=processArticleHTML`;
 
     // Define a global function to handle the JSONP response
     window.processArticleHTML = function (data) {
-      const htmlContent = data.parse.text['*'];
+      const htmlContent = data.parse.text["*"];
       const title = data.parse.title;
 
       // Create a container element and set its innerHTML to the HTML content of the article
-      const containerElement = document.createElement('div');
-      const headingElement = document.createElement('h1');
+      const containerElement = document.createElement("div");
+      const headingElement = document.createElement("h1");
       headingElement.textContent = title;
       containerElement.appendChild(headingElement);
       containerElement.innerHTML += htmlContent;
@@ -78,13 +78,13 @@ function jowiki(element) {
     };
 
     // Add a script element to the page to load the HTML content of the article
-    const scriptElement = document.createElement('script');
+    const scriptElement = document.createElement("script");
     scriptElement.src = htmlUrl;
     document.body.appendChild(scriptElement);
   };
 
   // Add a script element to the page to load the random article data
-  const scriptElement = document.createElement('script');
+  const scriptElement = document.createElement("script");
   scriptElement.src = url;
   document.body.appendChild(scriptElement);
 }
@@ -98,7 +98,7 @@ function jowiki(element) {
 function joimg(element) {
   const width = element.dataset.joWidth || 200;
   const height = element.dataset.joHeight || 200;
-  const text = element.dataset.joText || '${width} x ${height}';
+  const text = element.dataset.joText || `${width} x ${height}`;
   const bgColor = element.dataset.joBgColor || '#f1f1f1';
   const photo = element.dataset.joPhoto || false;
 
@@ -123,9 +123,8 @@ function joimg(element) {
   element.appendChild(img);
 
   if (photo) {
-    const photoUrl = 'https://loremflickr.com/${width}/${height}/${photo}';
-    element.style.background = 'no-repeat url(${photoUrl})';
-    element.style.backgroundSize = 'cover';
+    const photoUrl = `https://loremflickr.com/${width}/${height}/${photo}`;
+    element.style.background = `no-repeat url(${photoUrl})`;
   }
 }
 
