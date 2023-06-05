@@ -4,7 +4,7 @@
     - for build: npx tailwindcss -i ./assets/src/style.css -o ./assets/style.css --minify
 */
 module.exports = {
-  content: ["./*.html"],
+  content: ["./sites/themes/pixy/*.html"],
   /* chemins à surveiller */
   theme: {
     extend: {
