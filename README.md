@@ -42,6 +42,61 @@ $ docker-compose up
 
 Then open your browser to https://sample.localhost, https://sampleonepage.localhost or https://sampleonepage2d.localhost. Next explore and play with the [base](https://github.com/taophp/caddy-tailor/tree/main/sites/themes/base) theme and [others](https://github.com/taophp/caddy-tailor/tree/main/sites/themes) ! And explore and play with the [contents samples](https://github.com/taophp/caddy-tailor/tree/main/sites/subdomains) !
 
+### How it works
+
+### Caddyfile trick
+
+The first thing that allows CaddyTailor to work is the [route directive in the Caddyfile](https://github.com/taophp/caddy-tailor/blob/main/Caddyfile#L11) :
+```yaml
+    route {
+        try_files /subdomains/{http.request.host.labels.1}/{path} {path} index.html
+    }
+```
+
+It makes the webserver to looks for a file in three locations, in this order, and the first win :
+
+1. in the directory of the website, so any file define here will be served directly,
+2. from the root of the site : use it to addresse theme assets,
+3. [index.html](https://github.com/taophp/caddy-tailor/blob/main/sites/index.html) : it is the _router template_ of CaddyTailor, which make the themes working.
+
+
+### Directory structure
+
+Except the trick in Caddyfile, CaddyTailor resides belongs to the [sites directory](https://github.com/taophp/caddy-tailor/tree/main/sites).
+OK, you may configure your project another way, but it is the case wit this project.
+
+
+```
+├── subdomains
+│   ├── sample
+│   │   └── .config.yml
+│   ├── sampleonepage
+│   │   └── .config.yml
+│   ├── sampleonepage2d
+│   │   └── .config.yml
+├── themes
+│   ├── base
+│   ├── baseonepage
+│   ├── baseonepage2d
+│   ├── core
+│   ├── pixy
+│   └── pure
+├── index.html
+└── default.config.ymml
+```
+
+In this project, all sites are [subdomains of localhost](https://github.com/taophp/caddy-tailor/blob/main/Caddyfile#L6) and their datas are stored in the `subdomains` directory, on per site.
+
+All themes are stored in the [`themes`](https://github.com/taophp/caddy-tailor/tree/main/sites/themes) directory, one directory per theme. They contains templates, and, eventually, assets.
+
+`index.html` is the _router template_ that routes data into the theme templates. It is required to make CaddyTailor work and contains it mains logic.
+
+`default.config.yml` contains the default configuration to adapt the behavior of the theme. Each theme may define its own directives, but this file define a minimal set that should be shared by all. It can also be seen as a documentation to help writing the sites configuration. This configuration is overwriten by the sites configuration, which stands in the `.config.yml` in each site directory.
+
+Some files may be shared by themes. So, the pseudo-theme `core` was created to prevent re-inventing the wheel for each theme. 
+
+Each theme requires the sites that uses them to adopt an specific directory structure. `sample` sites are presents in this project to document those expectations. Each theme _should_ contains a `README.md` to document how it works (directory structure expected, specific configuration directives...).
+
 ## License
 
 Caddy Tailor is released under the [MIT License](https://github.com/caddytailor/caddytailor/blob/main/LICENSE).
