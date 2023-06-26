@@ -1,4 +1,5 @@
 {{- $config :=index .Args 0 -}}
+{{- $first :=index .Args 1 -}}
 {{- $config = $config | merge (dict "template" "page") -}}
 
 {{- $files := list  -}}
@@ -13,7 +14,7 @@
 {{- end -}}
 {{- $files = $files|sortAlpha }}
 
-<div class="category" id="{{$config.id}}">
+<div class="category container mx-auto w-screen {{if $first}}first{{else}}h-screen{{end}}" id="{{$config.id}}">
 	<div class="control control-left"></div>
 
 	{{- range $filePath := $files -}}
@@ -26,7 +27,7 @@
 		{{- $config = $config | merge (dict "id" (trimSuffix ".md" $filePath)) -}}
 		{{- $themePath := printf "themes/%s/" $config.theme -}}
 		{{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
-		{{- include $pageTemplate $config $content -}}
+		{{- include $pageTemplate $config $content $first -}}
 	{{- end -}}
 
 	<div class="control control-right"></div>

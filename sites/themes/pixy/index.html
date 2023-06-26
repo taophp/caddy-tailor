@@ -1,63 +1,61 @@
 {{- $config :=index .Args 0 -}}
 {{- $config = $config | merge (dict "template" "category") -}}
-{{- include  (printf "/themes/%s/head.html" $config.theme) $config -}}
+{{- include (printf "/themes/%s/head.html" $config.theme) $config -}}
 
-{{- $files := list  -}}
+{{- $files := list -}}
 {{- $listFile := listFiles $config.dir -}}
 {{- range $filePath := $listFile -}}
-	{{- if not (hasPrefix "." (base $filePath))}}
-		{{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
-		{{- $stat := fileStat $realFilePath -}}
-		{{- if $stat.IsDir -}}
-			{{- $categoryConfigFilePath := (printf "%s/%s" $realFilePath "01-index.md") -}}
-			{{- if fileExists $categoryConfigFilePath}}
-				{{- $contentFileContent := (include $categoryConfigFilePath | splitFrontMatter) -}}
-				{{- $fileConfig := $contentFileContent.Meta -}}
-				{{- if not $fileConfig.hide -}}
-					{{- $files = append $files $filePath -}}
-				{{- end -}}
-			{{- else -}}
-				{{- $files = append $files $filePath -}}
-			{{- end -}}
-		{{- end -}}
-	{{- end -}}
+{{- if not (hasPrefix "." (base $filePath))}}
+{{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
+{{- $stat := fileStat $realFilePath -}}
+{{- if $stat.IsDir -}}
+{{- $categoryConfigFilePath := (printf "%s/%s" $realFilePath "01-index.md") -}}
+{{- if fileExists $categoryConfigFilePath}}
+{{- $contentFileContent := (include $categoryConfigFilePath | splitFrontMatter) -}}
+{{- $fileConfig := $contentFileContent.Meta -}}
+{{- if not $fileConfig.hide -}}
+{{- $files = append $files $filePath -}}
+{{- end -}}
+{{- else -}}
+{{- $files = append $files $filePath -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
 {{- end -}}
 {{- $files = $files|sortAlpha }}
 
-<div class="container mx-auto">
-	{{- range $filePath := $files -}}
-		{{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
-		{{- $config = $config | merge (dict "dir" $config.dir) -}}
-		{{- $config = $config | merge (dict "id" $filePath) -}}
-		{{- $themePath := printf "themes/%s/" $config.theme -}}
-		{{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
-		{{- include $pageTemplate $config -}}
-	{{- end -}}
-
-</div>
-
-<nav  class="color-cell bg-primary-950 text-secondary-50">
-	<ul>
-		{{- range $file := $files -}}
-			{{- $realFile := (printf "%s/%s" $config.dir $file) -}}
-			{{- $categoryConfigFilePath := (printf "%s/%s" $realFile "01-index.md") -}}
-			{{- if fileExists $categoryConfigFilePath}}
+{{- $first := true }}
+{{- range $filePath := $files -}}
+	{{- $realFilePath := (printf "%s/%s" $config.dir $filePath) -}}
+	{{- $config = $config | merge (dict "dir" $config.dir) -}}
+	{{- $config = $config | merge (dict "id" $filePath) -}}
+	{{- $themePath := printf "themes/%s/" $config.theme -}}
+	{{- $pageTemplate := printf "%s/%s.html" $themePath $config.template -}}
+	{{- include $pageTemplate $config $first -}}
+	{{- if $first }}
+		<nav class="color-cell bg-primary-900 text-secondary-50 h-10">
+			<ul>
+				{{- range $file := $files -}}
+				{{- $realFile := (printf "%s/%s" $config.dir $file) -}}
+				{{- $categoryConfigFilePath := (printf "%s/%s" $realFile "01-index.md") -}}
+				{{- if fileExists $categoryConfigFilePath}}
 				{{- $contentFileContent := (include $categoryConfigFilePath | splitFrontMatter) -}}
 				{{- $fileConfig := $contentFileContent.Meta -}}
 				{{- if not $fileConfig.hideInMenu -}}
-					<li>
-						<a href="#{{$file}}">{{$fileConfig.title}}</a>
-					</li>
+				<li>
+					<a href="#{{$file}}">{{$fileConfig.title}}</a>
+				</li>
 				{{- end -}}
-			{{else}}
+				{{else}}
 				<li>
 					<a href="#{{$file}}">{{$file}}</a>
 				</li>
-			{{- end -}}
-		{{- end -}}
-	</ul>
-</nav>
+				{{- end -}}
+				{{- end -}}
+			</ul>
+		</nav>
+		{{- $first = false -}}
+	{{- end -}}
+{{- end -}}
 
-
-
-{{- include  (printf "/themes/%s/foot.html" $config.theme) $config -}}
+{{- include (printf "/themes/%s/foot.html" $config.theme) $config -}}

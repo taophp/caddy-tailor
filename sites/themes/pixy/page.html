@@ -1,6 +1,7 @@
 {{- $config :=index .Args 0 -}}
 {{- $content :=index .Args 1 -}}
-<a id="{{$config.id}}"></a><div class="page h-screen" {{- if $config.background -}} style="background:{{$config.background}}" {{- end -}} {{- if $config.class -}} class="background:{{$config.class}}" {{- end -}}>
-    <div class="prose">{{- markdown $content -}}</div>
+{{- $first :=index .Args 2 -}}
+<a id="{{$config.id}}"></a><div class="page w-screen {{if $first}}{{else}}min-h-screen{{end}}" {{- if $config.background -}} style="background:{{$config.background}}" {{- end -}} {{- if $config.class -}} class="background:{{$config.class}}" {{- end -}}>
+    <div class="prose w-screen">{{- markdown $content -}}</div>
 </div>
 
