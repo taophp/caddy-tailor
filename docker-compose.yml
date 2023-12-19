@@ -2,8 +2,7 @@ version: "3.7"
 
 services:
   caddy:
-    build: ./dockers/caddy
-    #image: caddy:latest
+    image: caddy:latest
     ports:
       - "443:443"
     volumes:
