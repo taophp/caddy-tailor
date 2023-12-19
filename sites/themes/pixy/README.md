@@ -2,4 +2,4 @@
 
 Developped for the [PixyBlue website](https://pixyblue.com).
 
-Based on the BaseOnePage theme.
+Based on the BaseOnePage2d theme.
