@@ -45,45 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
 
-        section.addEventListener('touchstart', function (e) {
-            var touchobj = e.changedTouches[0];
-            startX = touchobj.rubricX;
-            startY = touchobj.rubricY;
-            startTime = new Date().getTime();
-            distX = 0;
-            distY = 0;
-            e.preventDefault();
-        }, false);
-
-        section.addEventListener('touchmove', function (e) {
-            var touchobj = e.changedTouches[0];
-            distX = touchobj.rubricX - startX;
-            distY = touchobj.rubricY - startY;
-            e.preventDefault();
-        }, false);
-
-        section.addEventListener('touchend', function (e) {
-            elapsedTime = new Date().getTime() - startTime;
-            if (elapsedTime <= allowedTime) {
-                if (Math.abs(distX) > Math.abs(distY)) {
-                    if (Math.abs(distX) >= threshold) {
-                        const control = distX < 0 ? section.querySelector('.control-right') : section.querySelector('.control-left');
-                        if (control && !control.classList.contains('disabled')) {
-                            control.click();
-                        }
-                    }
-                } else {
-                    if (Math.abs(distY) >= threshold) {
-                        if (distY < 0) {
-                            navigateToNextSection(section);
-                        } else if (distY > 0) {
-                            navigateToPrevSection(section);
-                        }
-                    }
-                }
-            }
-        }, false);
-
         section.addEventListener('click', function (e) {
             if (e.target.tagName === 'A' && e.target.getAttribute('href').startsWith('#')) {
                 const targetRubricId = e.target.hash.substring(1);

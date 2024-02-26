@@ -1411,6 +1411,10 @@ select {
   width: 100vw;
 }
 
+.w-dvw {
+  width: 100dvw;
+}
+
 .shrink-0 {
   flex-shrink: 0;
 }
@@ -1448,6 +1452,10 @@ select {
   cursor: pointer;
 }
 
+.snap-x {
+  scroll-snap-type: x var(--tw-scroll-snap-strictness);
+}
+
 .snap-y {
   scroll-snap-type: y var(--tw-scroll-snap-strictness);
 }
@@ -1458,6 +1466,10 @@ select {
 
 .snap-start {
   scroll-snap-align: start;
+}
+
+.snap-always {
+  scroll-snap-stop: always;
 }
 
 .list-none {
@@ -2020,6 +2032,10 @@ select {
   transition-duration: 500ms;
 }
 
+.duration-200 {
+  transition-duration: 200ms;
+}
+
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -2118,12 +2134,44 @@ select {
   animation: rotate-counterclockwise 200s linear infinite;
 }
 
+.hover\:absolute:hover {
+  position: absolute;
+}
+
+.hover\:right-0:hover {
+  right: 0px;
+}
+
+.hover\:right-4:hover {
+  right: 1rem;
+}
+
+.hover\:right-8:hover {
+  right: 2rem;
+}
+
+.hover\:right-10:hover {
+  right: 2.5rem;
+}
+
 .hover\:w-40:hover {
   width: 10rem;
 }
 
 .hover\:w-56:hover {
   width: 14rem;
+}
+
+.hover\:w-52:hover {
+  width: 13rem;
+}
+
+.hover\:w-48:hover {
+  width: 12rem;
+}
+
+.hover\:overflow-x-auto:hover {
+  overflow-x: auto;
 }
 
 .hover\:bg-\[\#76DA76\]:hover {
@@ -2163,6 +2211,10 @@ select {
 
 .hover\:opacity-100:hover {
   opacity: 1;
+}
+
+.focus\:overflow-x-auto:focus {
+  overflow-x: auto;
 }
 
 @media (min-width: 768px) {

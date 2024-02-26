@@ -1,7 +1,7 @@
 {{- $config :=index .Args 0 -}}
 {{- $content :=index .Args 1 -}}
 {{- $first :=index .Args 2 -}}
-<div id="{{$config.id}}" class="rubric pb-10 relative px-2 w-screen min-h-dvh flex content-center justify-center shrink-0 bg-contain bg-no-repeat transition ease-in-out delay-150 {{if $first}}{{else}}min-h-full{{end}}{{if $config.class}} {{$config.class}}{{end}}" {{- if $config.background -}} style="background:{{$config.background}}" {{- end -}} {{- if $config.class -}} class="background:{{$config.class}}" {{- end -}}>
+<div id="{{$config.id}}" class="rubric relative px-2 w-screen min-h-dvh flex content-center justify-center shrink-0 bg-contain bg-no-repeat transition ease-in-out delay-150 {{if $first}}{{else}}min-h-full{{end}}{{if $config.class}} {{$config.class}}{{end}}" {{- if $config.background -}} style="background:{{$config.background}}" {{- end -}} {{- if $config.class -}} class="background:{{$config.class}}" {{- end -}}>
     <div class="prose pt-5 pb-5">{{- markdown $content -}}</div>
 </div>
 

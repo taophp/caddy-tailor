@@ -14,7 +14,7 @@
 {{- end -}}
 {{- $files = $files|sortAlpha }}
 
-<section class="relative snap-start w-screen min-h-full flex flex-column overflow-x-hidden -mt-10{{if $first}}{{else}} pt-10{{end}}" id="{{$config.id}}">
+<section class="relative w-screen min-h-dvh flex flex-column overflow-x-hidden -mt-10{{if $first}}{{else}} pt-10{{end}}" id="{{$config.id}}">
 	<div class="opacity-50 hover:opacity-100 control control-left absolute w-8 h-8 bg-main-lighter rounded-full z-10 cursor-pointer -translate-y-1/2 transition-colors left-2 md:left-12"></div>
 
 	{{- range $filePath := $files -}}
