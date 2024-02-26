@@ -9,114 +9,90 @@
 }
 
 :root {
-    font-size: 16px;
-  }
-  @media (min-width: 768px) {
+    font-size: 2.0833333333vw;
+}
+
+@media (max-width: 768px) {
     :root {
-      font-size: 2.083333333333333vw;
+        font-size: 16px;
     }
-  }
-  @media (min-width: 1536px) {
+}
+
+@media (min-width: 1536px) {
     :root {
-      font-size: 24px;
+        font-size: 32px;
     }
-  }
-  
-nav {
-    position: sticky;
-    top:0;
-    width: 100vw;
-    display: block;
 }
-
-nav ul{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-nav ul li {
-    list-style: none;
-}
-
-nav ul li a {
-    display: inline-block;
-    padding: 0.5em;
-}
-
-div.category {
-    min-width:100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    overflow-x: hidden;
-    position: relative;
-}
-
-div.page {
-    padding-top: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: transform 0.3s ease-in-out;
-    background-size: cover;
-}
-
-div.category.first {
-    padding-top: 0;
-    height: calc(100vh - 2.5rem);
-}
-
 
 .control {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 2rem;
-    height: 2rem;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    z-index: 1;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    top: 50vh;
 }
 
-.control:hover {
-    background-color: rgba(255, 255, 255, 0.8);
+.control-right::after,
+.control-left::before {
+    content: "";
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: solid black;
+    margin: .7rem 0 0 .75rem;
+    border-width: 0 0.2rem 0.2rem 0;
 }
 
 .control-right::after {
-    content: "";
-    display: block;
-    width: 0.5rem;
-    height: 0.5rem;
-    border: solid black;
-    border-width: 0 0.2rem 0.2rem 0;
     transform: rotate(-45deg);
-    margin: .7rem 0 0 .5rem;
 }
 
-.control-left::before{
-    content: "";
-    display: block;
-    width: 0.5rem;
-    height: 0.5rem;
-    border: solid black;
-    border-width: 0 0.2rem 0.2rem 0;
+.control-left::before {
     transform: rotate(135deg);
-    margin: .7rem 0 0 .75rem;
-}
-
-.control-left {
-    left: 3rem;
-}
-
-.control-right {
-    right: 2rem;
 }
 
 .control.disabled {
     display: none;
 }
 
+.diagonal-move {
+    animation: diagonalMove 5s ease-in-out forwards;
+    position: absolute;
+}
+
+@keyframes diagonalMove {
+    0% {
+        top: 100vh;
+        right: 100vw;
+    }
+
+    100% {
+        bottom: 0;
+        right: -12px;
+    }
+}
+
+@keyframes rotate-clockwise {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate-counterclockwise {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.slow-rotating-clockwise {
+    animation: rotate-clockwise 200s linear infinite;
+}
+
+
+.slow-rotating-counterclockwise {
+    animation: rotate-counterclockwise 200s linear infinite;
+}

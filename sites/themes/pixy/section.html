@@ -1,0 +1,34 @@
+{{- $config :=index .Args 0 -}}
+{{- $first :=index .Args 1 -}}
+{{- $config = $config | merge (dict "template" "rubric") -}}
+
+{{- $files := list  -}}
+{{- $dir := printf "%s/%s" $config.dir $config.id -}}
+
+{{- $listFile := listFiles $dir -}}
+{{- range $filePath := $listFile -}}
+	{{- $realFilePath := (printf "%s/%s" $dir $filePath) -}}
+	{{- if hasSuffix ".md" $realFilePath -}}
+		{{- $files = append $files $filePath -}}
+	{{- end -}}
+{{- end -}}
+{{- $files = $files|sortAlpha }}
+
+<section class="relative snap-start w-screen min-h-full flex flex-column overflow-x-hidden -mt-10{{if $first}}{{else}} pt-10{{end}}" id="{{$config.id}}">
+	<div class="opacity-50 hover:opacity-100 control control-left absolute w-8 h-8 bg-main-lighter rounded-full z-10 cursor-pointer -translate-y-1/2 transition-colors left-2 md:left-12"></div>
+
+	{{- range $filePath := $files -}}
+		{{- $realFilePath := (printf "%s/%s" $dir $filePath) -}}
+		{{- $contentFileContent := (include $realFilePath | splitFrontMatter) -}}
+		{{- $rubricConfig := $contentFileContent.Meta -}}
+		{{- $content := $contentFileContent.Body -}}
+		{{- $config = mergeOverwrite $config $rubricConfig -}}
+		{{- $config = $config | merge (dict "dir" $dir) -}}
+		{{- $config = $config | merge (dict "id" (trimSuffix ".md" $filePath)) -}}
+		{{- $themePath := printf "themes/%s/" $config.theme -}}
+		{{- $rubricTemplate := printf "%s/%s.html" $themePath $config.template -}}
+		{{- include $rubricTemplate $config $content $first -}}
+	{{- end -}}
+
+	<div class="opacity-50 hover:opacity-100 control control-right absolute w-8 h-8 bg-main-lighter rounded-full z-10 cursor-pointer -translate-y-1/2 transition-colors right-2 md:right-8"></div>
+</section>

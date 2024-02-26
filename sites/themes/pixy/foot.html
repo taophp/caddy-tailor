@@ -1,5 +1,5 @@
 {{- $config :=index .Args 0 -}}
-<footer class="text-primary-lighter bg-secondary-950 text-center">
+<footer class="text-primary-lighter bg-secondary-950 text-center relative">
 	{{- if $config.footContents -}}
 		{{$config.footContents}}
 	{{end}}
