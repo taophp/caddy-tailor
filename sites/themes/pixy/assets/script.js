@@ -112,3 +112,13 @@ function updateControls(section) {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    let links = document.querySelectorAll("a[href^='http://'], a[href^='https://']");
+    links.forEach(function (link) {
+        link.addEventListener("click", function (event) {
+            window.open(this.href);
+            event.preventDefault();
+        });
+    });
+});
+
