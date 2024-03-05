@@ -7,14 +7,13 @@ document.addEventListener('DOMContentLoaded', function () {
             var sectionHeight = section.offsetHeight;
 
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                var sectionId = section.id;
                 document.querySelectorAll('nav li').forEach(function (li) {
                     li.classList.remove('bg-white');
                     li.classList.remove('text-main');
                 });
 
-                document.querySelector('nav li a[href="#' + sectionId + '"]').parentNode.classList.add('bg-white');
-                document.querySelector('nav li a[href="#' + sectionId + '"]').parentNode.classList.add('text-main');
+                document.querySelector('nav li a[href="#' + section.id + '"]').parentNode.classList.add('bg-white');
+                document.querySelector('nav li a[href="#' + section.id + '"]').parentNode.classList.add('text-main');
 
             }
         });
@@ -27,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener("DOMContentLoaded", function () {
     const sections = document.querySelectorAll('section');
-    let startX, startY, distX, distY, threshold = 5, allowedTime = 30000, elapsedTime, startTime;
 
     sections.forEach(section => {
         const rubrics = section.querySelectorAll('.rubric');
@@ -38,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         controls.forEach(control => {
             control.addEventListener('click', function () {
-                console.log(section);
                 const direction = this.classList.contains('control-left') ? -1 : 1;
                 const currentRubricIndex = Array.from(section.querySelectorAll('.rubric')).findIndex(rubric => rubric.classList.contains('active'));
                 navigate2rubric(section, currentRubricIndex + direction);
