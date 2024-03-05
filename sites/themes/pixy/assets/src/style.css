@@ -60,11 +60,13 @@
     0% {
         top: 100vh;
         right: 100vw;
+        height: 0;
     }
 
     100% {
         bottom: 0;
         right: -12px;
+        height: 60dvh;
     }
 }
 
