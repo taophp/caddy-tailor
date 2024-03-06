@@ -6,7 +6,10 @@ services:
     ports:
       - "443:443"
     volumes:
-      - $PWD/Caddyfile:/etc/caddy/Caddyfile
-      - $PWD/sites:/usr/share/caddy
-      - $PWD/caddy_data:/data
-      - $PWD/caddy_config:/config
+      - type: bind
+        source: './Caddyfile'
+        target: /etc/caddy/Caddyfile
+        read_only: true
+      - ./sites:/usr/share/caddy
+      - ./caddy_data:/data
+      - ./caddy_config:/config
