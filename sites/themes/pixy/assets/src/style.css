@@ -29,6 +29,10 @@
     padding: 0;
 }
 
+*, .prose {
+  line-height: 1.2;
+}
+
 :root {
     font-size: 2.0833333333vw;
 }
