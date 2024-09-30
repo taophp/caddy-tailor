@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Glametrix';
+    src: url('fonts/Glametrix.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Glametrix';
+    src: url('fonts/GlametrixBold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Glametrix';
+    src: url('fonts/GlametrixLight.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
