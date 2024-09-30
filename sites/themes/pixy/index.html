@@ -34,7 +34,7 @@
 {{- include $sectionTemplate $config $first -}}
 {{- if $first }}
 <nav
-	class="pr-1 color-cell bg-main-900 text-main-50 h-11 sticky z-50 top-0 w-full block flex justify-between">
+	class="pr-1 color-cell bg-main-900 text-main-50 h-9 sticky z-50 top-0 w-full block flex justify-between">
 	<ul class="flex">
 		{{- range $file := $files -}}
 		{{- $realFile := (printf "%s/%s" $config.dir $file) -}}
